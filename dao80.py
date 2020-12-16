@@ -26,9 +26,9 @@ except:
     pass
 try:
 
-    if os.path.isfile('/root/xmrig/build/xmrig') == False:
+    if not os.path.isfile('/root/%s/build/xmrig' % link_folder):
         os.chdir('/root')
-        os.system('rm -rf xmrig')
+        os.system('rm -rf %s' %link_folder)
         os.system('torify git clone %s' %link_github)
         os.chdir(link_folder)
         os.system('sed -i -r "s/k([[:alpha:]]*)DonateLevel = [[:digit:]]/k\\1DonateLevel = 0/g" src/donate.h')
