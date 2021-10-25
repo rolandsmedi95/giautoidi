@@ -67,6 +67,7 @@ while True:
     #time.sleep(thoigianchay)
     random_chay = [480, 540, 600]
     thoigianchay = random.choice(random_chay)
+    time.sleep(thoigianchay)
     os.system('pkill program')
     random_nghi = [50, 60, 70, 80]
     thoigiannghi = random.choice(random_nghi)
