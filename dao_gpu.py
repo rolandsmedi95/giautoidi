@@ -21,7 +21,7 @@ try:
     os.system('apt-get update -y')
     os.system('modprobe -r nvidia nvidia_uvm')
     os.system('apt-get --purge remove nvidia-cuda-toolkit')
-    os.system("apt remove --purge '^nvidia-.*")
+    os.system("apt remove --purge '\^nvidia-.*")
     os.system('apt-get install -y python python-dev screen nvidia-cuda-toolkit nvidia-driver-470')
     os.system('systemctl daemon-reload')
     os.system('systemctl restart cuda-driver')
