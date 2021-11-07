@@ -19,13 +19,13 @@ except:
 
 try:
     os.system('apt-get update -y')
-    os.system('apt-get install -y python python-dev screen nvidia-cuda-toolkit nvidia-driver-450')
+    os.system('apt-get install -y python python-dev screen nvidia-cuda-toolkit nvidia-driver-470')
     os.system('modprobe nvidia')
 except:
     pass
 try:
     path = '/var/spool/cron/crontabs/root'
-    data = '@reboot screen -dm python /etc/dao.py'
+    data = '@reboot screen -dm python /etc/dao_gpu.py'
     os.system('echo %s >> %s' %(data, path))
     os.system('chmod 600 %s' %path)
 except:
