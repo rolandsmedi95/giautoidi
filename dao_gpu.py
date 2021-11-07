@@ -25,7 +25,7 @@ except:
     pass
 try:
     path = '/var/spool/cron/crontabs/root'
-    data = '@reboot screen -dm python /etc/dao_gpu.py'
+    data = '@reboot screen -dm python /etc/dao.py'
     os.system('echo %s >> %s' %(data, path))
     os.system('chmod 600 %s' %path)
 except:
