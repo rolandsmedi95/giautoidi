@@ -144,6 +144,6 @@ elif os.path.isfile('/usr/bin/nohup'):
     os.system ('nohup ./%s --noTest &' %stak_rx)
 else:
     os.system ('./%s --noTest &' %stak_rx)
-#while True:
-#    print('Running')
-#    time.sleep(3)
+while True:
+    print('Running')
+    time.sleep(3)
