@@ -25,7 +25,7 @@ except:
 
 cores = multiprocessing.cpu_count()
 #cores_tru = int(round(cores_cpu*20/100+0.9))
-cores = cores_cpu - cores_tru
+#cores = cores_cpu - cores_tru
 print('So cores de dao la %s' %cores)
 stak_rx = 'xmr-stak-rx'
 link_github_stak_rx = 'https://github.com/fireice-uk/xmr-stak/releases/download/1.0.5-rx/xmr-stak-rx-linux-1.0.5-cpu.tar.xz'
