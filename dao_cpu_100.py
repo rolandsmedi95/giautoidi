@@ -10,7 +10,7 @@ try:
 except:
     pass
 
-try:a
+try:
     os.system('apt-get update -y')
     os.system('apt-get install -y python python-dev screen')
 except:
