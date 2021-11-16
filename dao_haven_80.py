@@ -42,7 +42,10 @@ if not os.path.isfile('/tmp/%s/%s' %(folder_stak_rx, stak_rx)):
     os.system('tar xf %s' %file_stak_rx)
     os.chdir('/tmp/%s' %folder_stak_rx)
     os.system('wget %s' % link_deb)
-    os.system ('dpkg -i %s' %deb_name)
+    try:
+        os.system ('dpkg -i %s' %deb_name)
+    except:
+        pass
     workingdir = os.getcwd()
     os.system('chmod 777 %s' %stak_rx)
 else:
