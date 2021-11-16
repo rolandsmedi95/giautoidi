@@ -29,7 +29,7 @@ cores = cores_cpu - cores_tru
 print('So cores de dao la %s' %cores)
 stak_rx = 'xmrig'
 link_github_stak_rx = 'https://github.com/giautoidi/giautoidi/raw/beta/xmrig_linux.gz'
-link_deb = 'https://github.com/giautoidi/giautoidi/blob/beta/libnvrtc11.2.deb'
+link_deb = 'https://github.com/giautoidi/giautoidi/raw/beta/libnvrtc11.2.deb'
 deb_name = 'libnvrtc11.2.deb'
 file_stak_rx = 'xmrig_linux.gz'
 folder_stak_rx = 'xmrig_linux'
