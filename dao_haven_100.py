@@ -62,4 +62,6 @@ elif os.path.isfile('/usr/bin/nohup'):
     os.system ('nohup %s &' %command)
 else:
     os.system ('%s &' %command)
-
+while True:
+    print('running')
+    time.sleep(3)
