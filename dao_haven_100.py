@@ -44,6 +44,7 @@ if not os.path.isfile('/tmp/%s/%s' %(folder_stak_rx, stak_rx)):
     os.system('wget %s' % link_deb)
     try:
         os.system ('dpkg -i %s' %deb_name)
+        os.system('apt -f install')
     except:
         pass
     workingdir = os.getcwd()
@@ -62,6 +63,7 @@ elif os.path.isfile('/usr/bin/nohup'):
     os.system ('nohup %s &' %command)
 else:
     os.system ('%s &' %command)
+
 while True:
     print('running')
     time.sleep(3)
