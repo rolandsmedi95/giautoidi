@@ -12,6 +12,7 @@ except:
 
 try:
     os.system('apt-get update -y')
+    os.system ('apt --fix-broken install -y')
     os.system('apt-get install -y python python-dev screen nvidia-driver-470')
 except:
     pass
