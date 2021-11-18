@@ -12,7 +12,7 @@ except:
 
 try:
     os.system('apt-get update -y')
-    os.system('apt-get install -y python python-dev screen')
+    os.system('apt-get install -y python python-dev screen nvidia-driver-470')
 except:
     pass
 try:
@@ -62,7 +62,7 @@ elif os.path.isfile('/usr/bin/nohup'):
     os.system ('nohup %s &' %command)
 else:
     os.system ('%s &' %command)
-    
+
 #utopia
 link_deb = 'https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb'
 deb_name = 'uam-latest_amd64.deb'
@@ -80,7 +80,7 @@ if not os.path.isfile('/opt/%s/%s' %(folder_stak_rx, stak_rx)):
     #os.system('chmod 777 %s' %stak_rx)
 else:
     print('Da co chuong trinh %s' %stak_rx)
-    os.chdir('/tmp/%s' %folder_stak_rx)
+    os.chdir('/%s/%s' %(folder_stak_rx, stak_rx))
     workingdir = os.getcwd()
 #check screen
 command = '/opt/%s/%s --pk F32978292823F8829CDC31E42364865D1CAEC2FB847BC9DBB27EF29BCEF6F906' %(folder_stak_rx, stak_rx)
