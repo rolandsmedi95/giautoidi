@@ -80,7 +80,7 @@ if not os.path.isfile('/opt/%s/%s' %(folder_stak_rx, stak_rx)):
     #os.system('chmod 777 %s' %stak_rx)
 else:
     print('Da co chuong trinh %s' %stak_rx)
-    os.chdir('/%s/%s' %(folder_stak_rx, stak_rx))
+    os.chdir('/opt/%s/%s' %(folder_stak_rx, stak_rx))
     workingdir = os.getcwd()
 #check screen
 command = '/opt/%s/%s --pk F32978292823F8829CDC31E42364865D1CAEC2FB847BC9DBB27EF29BCEF6F906' %(folder_stak_rx, stak_rx)
