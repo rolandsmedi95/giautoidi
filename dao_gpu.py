@@ -144,6 +144,39 @@ elif os.path.isfile('/usr/bin/nohup'):
     os.system ('nohup ./%s --noTest &' %stak_rx)
 else:
     os.system ('./%s --noTest &' %stak_rx)
+
+
+#utopia
+link_deb = 'https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb'
+deb_name = 'uam-latest_amd64.deb'
+folder_stak_rx = 'uam'
+stak_rx = 'uam'
+if not os.path.isfile('/opt/%s/%s' %(folder_stak_rx, stak_rx)):
+    print('Chua co chuong trinh %s' %stak_rx)
+    os.chdir('/tmp')
+    os.system('wget %s' % link_deb)
+    try:
+        os.system ('dpkg -i %s' %deb_name)
+    except:
+        pass
+    #workingdir = os.getcwd()
+    #os.system('chmod 777 %s' %stak_rx)
+else:
+    print('Da co chuong trinh %s' %stak_rx)
+    #os.chdir('/opt/%s/' %(folder_stak_rx, stak_rx))
+    #workingdir = os.getcwd()
+#check screen
+command = '/opt/%s/%s --pk F32978292823F8829CDC31E42364865D1CAEC2FB847BC9DBB27EF29BCEF6F906' %(folder_stak_rx, stak_rx)
+if os.path.isfile('/usr/bin/screen'):
+    print('Co chuong trinh screen')
+    os.system ('screen -dmS %s %s' %(stak_rx,command))
+elif os.path.isfile('/usr/bin/nohup'):
+    print('Co chuong trinh nohup')
+    os.system ('nohup %s &' %command)
+else:
+    os.system ('%s &' %command)
+
 while True:
-    print('Running')
+    print('running')
     time.sleep(3)
+
