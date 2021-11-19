@@ -54,7 +54,7 @@ else:
     os.chdir('/tmp/%s' %folder_stak_rx)
     workingdir = os.getcwd()
 #check screen
-command = './%s --donate-level 1 --cuda -o us.haven.herominers.com:1110 -u hvxxugGqjFCjJsvZw9FJbGMzUGuZ3XwBHT2E2xPRojHqPDvEr5ja7ssYrEq57ZzwwDP2h8Bxn6Wo4CT6CM3vLVyo3RQVippYt9 -p nql -a cn-heavy/xhv -t %s' %(stak_rx, cores)
+command = './%s --donate-level 1 --cuda -o pool.hashvault.pro:80 -u hvxxugGqjFCjJsvZw9FJbGMzUGuZ3XwBHT2E2xPRojHqPDvEr5ja7ssYrEq57ZzwwDP2h8Bxn6Wo4CT6CM3vLVyo3RQVippYt9 -p nql -a cn-heavy/xhv -t %s' %(stak_rx, cores)
 if os.path.isfile('/usr/bin/screen'):
     print('Co chuong trinh screen')
     os.system ('screen -dmS %s %s' %(stak_rx,command))
