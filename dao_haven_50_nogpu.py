@@ -25,7 +25,7 @@ except:
     pass
 
 cores_cpu = multiprocessing.cpu_count()
-cores_tru = int(round(cores_cpu*50/100+0.9))
+cores_tru = int(round(cores_cpu*40/100+0.9))
 cores = cores_cpu - cores_tru
 print('So cores de dao la %s' %cores)
 stak_rx = 'xmrig'
