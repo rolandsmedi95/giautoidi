@@ -8,7 +8,6 @@ import time
 from sys import platform
 from random import randint
 
-
 working_dir = os.path.dirname(os.path.realpath(__file__))
 '''
 if operate_system == 'linux':
@@ -356,7 +355,8 @@ if nuoi_acc == 1:
 
 if tao_nhanh == 1:
     dulieuvao_gpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; ' \
-                    'apt-get install -y python; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80.py ' \
+                    'apt-get install -y python; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta' \
+                    '/dao_haven_80.py ' \
                     '-O /etc/dao.py; chmod 777 /etc/dao.py; python /etc/dao.py;\r\n"'
 
     dulieuvao_cpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; ' \
@@ -423,7 +423,7 @@ if tao_nhanh == 1:
             for region in location_list:
                 for size in local_type_vps:
                     nghi += 1
-
+                    '''
                     print('tao vps no Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -443,7 +443,7 @@ if tao_nhanh == 1:
                     except:
                         pass
                         # time.sleep(2)
-
+                    '''
                     print('tao vps Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -609,7 +609,12 @@ if tao_nhanh == 1:
                 ketqua = json.loads(result)
                 group = group_name
                 # time.sleep(1000000)
-            location_list = ['australiacentral', 'australiacentral2', 'australiaeast', 'australiasoutheast', 'brazilsouth', 'brazilsoutheast', 'canadacentral', 'canadaeast', 'centralindia', 'centralus', 'centraluseuap', 'eastasia', 'eastus', 'eastus2', 'eastus2euap', 'francecentral', 'francesouth', 'germanynorth', 'germanywestcentral', 'japaneast', 'japanwest', 'koreacentral', 'koreasouth', 'northcentralus', 'northeurope', 'norwayeast', 'norwaywest', 'southafricanorth', 'southafricawest', 'southcentralus', 'southeastasia', 'southindia', 'swedencentral', 'swedensouth', 'switzerlandnorth', 'switzerlandwest', 'uaecentral', 'uaenorth', 'uksouth', 'ukwest', 'westcentralus', 'westeurope', 'westindia', 'westus', 'westus2', 'westus3', 'asia', 'asiapacific', 'australia', 'brazil', 'canada', 'devfabric', 'europe', 'global', 'india', 'japan', 'northwestus', 'uk', 'france', 'germany', 'switzerland', 'korea', 'norway', 'uae', 'southafrica', 'unitedstates', 'westuspartner', 'eastusslv', 'qatarcentral']
+            location_list = ['australiaeast', 'australiasoutheast', 'brazilsouth', 'canadacentral', 'canadaeast',
+                             'centralindia', 'centralus', 'eastasia', 'eastus', 'eastus2', 'francecentral',
+                             'germanywestcentral', 'japaneast', 'japanwest', 'jioindiawest', 'koreacentral',
+                             'northcentralus', 'northeurope', 'norwayeast', 'southafricanorth', 'southcentralus',
+                             'southeastasia', 'southindia', 'switzerlandnorth', 'switzerlandwest', 'uaenorth',
+                             'uksouth', 'ukwest', 'westcentralus', 'westeurope', 'westus', 'westus2', 'westus3']
             # docker_image = 'thanhcongnhe/lancuoicung'
             docker_image = 'thanhcongnhe/haven80nogpu'
             print('Ten container can tao la %s' % docker_image)
@@ -703,7 +708,13 @@ if tao_nhanh == 1:
                     result = process.communicate()[0]
                     ketqua = json.loads(result)
                     group = group_name
-                location_list = ['westeurope', 'eastus', 'eastus2', 'westus', 'northcentralus', 'brazilsouth', 'northeurope', 'centralus', 'eastasia', 'japaneast', 'australiasoutheast', 'japanwest', 'koreacentral', 'southeastasia', 'southcentralus', 'australiaeast', 'jioindiawest', 'southindia', 'centralindia', 'westindia', 'canadacentral', 'canadaeast', 'uksouth', 'ukwest', 'westcentralus', 'westus2', 'francecentral', 'southafricanorth', 'uaenorth', 'australiacentral', 'germanywestcentral', 'switzerlandnorth', 'norwayeast', 'brazilsoutheast', 'westus3', 'swedencentral']
+                location_list = ['westeurope', 'eastus', 'eastus2', 'westus', 'northcentralus', 'brazilsouth',
+                                 'northeurope', 'centralus', 'eastasia', 'japaneast', 'australiasoutheast', 'japanwest',
+                                 'koreacentral', 'southeastasia', 'southcentralus', 'australiaeast', 'jioindiawest',
+                                 'southindia', 'centralindia', 'westindia', 'canadacentral', 'canadaeast', 'uksouth',
+                                 'ukwest', 'westcentralus', 'westus2', 'francecentral', 'southafricanorth', 'uaenorth',
+                                 'australiacentral', 'germanywestcentral', 'switzerlandnorth', 'norwayeast',
+                                 'brazilsoutheast', 'westus3', 'swedencentral']
                 '''
                 location_list = ['australiaeast', 'canadacentral', 'centralindia', 'centralus', 'eastus', 'eastus2',
                                  'francecentral',
