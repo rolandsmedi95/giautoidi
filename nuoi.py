@@ -49,7 +49,7 @@ if tao_nhanh == 1:
     multi_vps_gpu = 1
     multi_vps = 1
     multi_container = 1
-    multi_workspace = 0
+    multi_workspace = 1
     multi_batch_account = 1
 
 if nuoi_acc == 1:
@@ -982,7 +982,7 @@ if tao_nhanh == 1:
                 rsa_pub_open = os.path.join(working_dir, rsa_file+'.pub')
                 local_fileopen = open(rsa_pub_open, 'r')
                 rsa_pub = local_fileopen.read()
-                command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (
+                command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --adminUserPassword Hoanglan@123 --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (
                     local_vps_name, rsa_pub, local_type, group_temp, region_temp, workspace_temp, subscript_temp)
                 print(command)
                 try:
