@@ -967,8 +967,20 @@ if tao_nhanh == 1:
                 local_reigon_array = ['japaneast', 'southcentralus', 'southeastasia']
                 if region_temp in local_reigon_array:
                     local_type = 'Standard_NV6'
-                path_rsa = '/var/azure/.ssh/id_rsa.pub'
-                local_fileopen = open(path_rsa, 'r')
+                working_dir = os.path.dirname(os.path.realpath(__file__))
+                rsa_file = 'id_rsa'
+                rsa_path = os.path.join(working_dir, rsa_file)
+                print('Checking file %s' % rsa_path)
+                check_rsa = os.path.exists(rsa_path)
+                if check_rsa:
+                    print('Da co file rsa')
+                else:
+                    print('Chua co file rsa, tao moi thoi')
+                    command = 'ssh-keygen -b 2048 -t rsa -C "" -f %s -q -N ""' % rsa_path
+                    result = subprocess.check_output(command, shell=True)
+                #path_rsa = '/var/azure/.ssh/id_rsa.pub'
+                rsa_pub_open = os.path.join(working_dir, rsa_file+'.pub')
+                local_fileopen = open(rsa_pub_open, 'r')
                 rsa_pub = local_fileopen.read()
                 command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (
                     local_vps_name, rsa_pub, local_type, group_temp, region_temp, workspace_temp, subscript_temp)
