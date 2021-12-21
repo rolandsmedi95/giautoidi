@@ -1026,3 +1026,4 @@ if tao_nhanh == 1:
             # Stop the threads
             for x in threads:
                 x.join()
+#a
