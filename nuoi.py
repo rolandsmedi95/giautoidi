@@ -1005,7 +1005,7 @@ if tao_nhanh == 1:
                     # print(ketqua)
                 except:
                     pass
-                time.sleep(300)
+                time.sleep(120)
                 while True:
                     command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
                         group_temp, workspace_temp, local_vps_name)
