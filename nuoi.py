@@ -1023,7 +1023,7 @@ if tao_nhanh == 1:
                         print(ketqua)
                     except:
                         pass
-                    f = open('/root/%s' % local_vps_name)
+                    f = open('/root/%s' % local_vps_name, 'r')
                     doc_file = f.read()
                     f.close()
                     ip_address = None
