@@ -1022,19 +1022,22 @@ if tao_nhanh == 1:
                         # print(ketqua)
                     except:
                         pass
-                    open_file = open('/root/%s' % local_vps_name, 'r')
-                    doc_file = open_file.read()
-                    open_file.close()
-                    print(doc_file)
-                    ip_address = None
-                    port_number = None
                     try:
-                        ip_address = re.findall("'publicIpAddress': '(.+?)'", doc_file)[0]
+                        open_file = open('/root/%s' % local_vps_name, 'r')
+                        doc_file = open_file.read()
+                        open_file.close()
+                        print(doc_file)
+                        ip_address = None
+                        port_number = None
+                    except:
+                        pass
+                    try:
+                        ip_address = re.findall('"publicIpAddress":"(.+?)"', doc_file)[0]
                         print(ip_address)
                     except:
                         pass
                     try:
-                        port_number = re.findall("'port': (.+?),", doc_file)[0]
+                        port_number = re.findall('"port":(.+?),"', doc_file)[0]
                         print(port_number)
                     except:
                         pass
