@@ -1058,7 +1058,7 @@ if tao_nhanh == 1:
                     f = open(command_ssh_path, "w")
                     f.write(command_ssh_data)
                     f.close()
-                print('ssh -i %s %s@%s' % (rsa_path, 'azureuser', ip_address))
+                print('ssh -i %s %s@%s -p %s' % (rsa_path, 'azureuser', ip_address, str(port_number)))
                 process = subprocess.Popen(
                     ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
                      'azureuser@' + ip_address, '-p ' + str(port_number)],
