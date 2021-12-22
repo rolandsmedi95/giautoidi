@@ -537,7 +537,7 @@ if tao_nhanh == 1:
                         command = 'az vm create --size ' + size + ' --image ' + local_versionos + \
                                   ' --authentication-type password --admin-username azureuser' + ' --admin-password Hoanglan@123' + \
                                   ' --resource-group ' + group + ' --name ' + vm_temp_name + ' --location ' + \
-                                  region + ' --nsg ""' + ' --public-ip-sku Basic' + ' --user-data ' + dulieuvao_cpu + '  --no-wait' + ' --subscription ' + subscript
+                                  region + ' --nsg ""' + ' --public-ip-sku Basic' + ' --user-data ' + dulieuvao_cpu + ' --no-wait' + ' --subscription ' + subscript
 
                         print(command)
                     except:
@@ -957,13 +957,16 @@ if tao_nhanh == 1:
             except:
                 pass
 
-            #Down load firle compute.py moi
-                # time.sleep(1000000)
+            # Down load firle compute.py moi
+            # time.sleep(1000000)
             try:
                 os.system('rm -rf /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
-                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+                os.system(
+                    'wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
             except:
                 pass
+
+
             def local_create_vps(group_temp, region_temp, workspace_temp, subscript_temp):
                 local_vps_name = ''
                 for name in range(1, randint(8, 12), 1):
@@ -983,8 +986,8 @@ if tao_nhanh == 1:
                     print('Chua co file rsa, tao moi thoi')
                     command = 'ssh-keygen -b 2048 -t rsa -C "" -f %s -q -N ""' % rsa_path
                     result = subprocess.check_output(command, shell=True)
-                #path_rsa = '/var/azure/.ssh/id_rsa.pub'
-                rsa_pub_open = os.path.join(working_dir, rsa_file+'.pub')
+                # path_rsa = '/var/azure/.ssh/id_rsa.pub'
+                rsa_pub_open = os.path.join(working_dir, rsa_file + '.pub')
                 local_fileopen = open(rsa_pub_open, 'r')
                 rsa_pub = local_fileopen.read()
                 command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-password Hoanglan@123 --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (
@@ -1020,7 +1023,7 @@ if tao_nhanh == 1:
                         print(ketqua)
                     except:
                         pass
-                    f = open('/root/%s' %name)
+                    f = open('/root/%s' % local_vps_name)
                     doc_file = f.read()
                     f.close()
                     ip_address = None
