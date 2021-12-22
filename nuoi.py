@@ -1007,7 +1007,6 @@ if tao_nhanh == 1:
                     pass
                 time.sleep(300)
                 while True:
-                    time.sleep(60)
                     command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
                         group_temp, workspace_temp, local_vps_name)
                     print(command)
@@ -1031,10 +1030,12 @@ if tao_nhanh == 1:
                     port_number = None
                     try:
                         ip_address = re.findall("'publicIpAddress': '(.+?)'", doc_file)[0]
+                        print(ip_address)
                     except:
                         pass
                     try:
                         port_number = re.findall("'port': (.+?),", doc_file)[0]
+                        print(port_number)
                     except:
                         pass
                     # price_array = re.findall("Buy \((.+?)\$", text_return)
@@ -1042,6 +1043,7 @@ if tao_nhanh == 1:
                         os.system('rm -rf /root/%s' % local_vps_name)
                         print('%s:%s' % (ip_address, str(port_number)))
                         break
+                    time.sleep(60)
                 command_ssh = 'command_ssh'
                 command_ssh_path = os.path.join(working_dir, command_ssh)
                 check_command_ssh = os.path.exists(command_ssh_path)
@@ -1053,7 +1055,7 @@ if tao_nhanh == 1:
                     f = open(command_ssh_path, "w")
                     f.write(command_ssh_data)
                     f.close()
-                print('ssh -i %s %s@%s' % (rsa_path, 'azureuser', ip))
+                print('ssh -i %s %s@%s' % (rsa_path, 'azureuser', ip_address))
                 process = subprocess.Popen(
                     ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
                      'azureuser@' + ip_address, '-p ' + str(port_number)],
