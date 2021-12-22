@@ -1007,7 +1007,7 @@ if tao_nhanh == 1:
                     pass
                 time.sleep(300)
                 while True:
-                    time.sleep(10)
+                    time.sleep(60)
                     command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
                         group_temp, workspace_temp, local_vps_name)
                     print(command)
@@ -1018,14 +1018,15 @@ if tao_nhanh == 1:
                         pass
                     try:
                         result = process.communicate()[0]
-                        print(result)
+                        # print(result)
                         ketqua = json.loads(result)
-                        print(ketqua)
+                        # print(ketqua)
                     except:
                         pass
-                    f = open('/root/%s' % local_vps_name, 'r')
-                    doc_file = f.read()
-                    f.close()
+                    open_file = open('/root/%s' % local_vps_name, 'r')
+                    doc_file = open_file.read()
+                    open_file.close()
+                    print(doc_file)
                     ip_address = None
                     port_number = None
                     try:
@@ -1038,6 +1039,8 @@ if tao_nhanh == 1:
                         pass
                     # price_array = re.findall("Buy \((.+?)\$", text_return)
                     if ip_address is not None and port_number is not None:
+                        os.system('rm -rf /root/%s' % local_vps_name)
+                        print('%s:%s' % (ip_address, str(port_number)))
                         break
                 command_ssh = 'command_ssh'
                 command_ssh_path = os.path.join(working_dir, command_ssh)
