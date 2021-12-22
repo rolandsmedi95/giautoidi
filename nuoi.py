@@ -7,6 +7,7 @@ import threading
 import time
 from sys import platform
 from random import randint
+import re
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 '''
@@ -956,6 +957,12 @@ if tao_nhanh == 1:
             except:
                 pass
 
+            #Down load firle compute.py moi
+            try:
+                os.system('rm -rf /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+            except:
+                pass
                 # time.sleep(1000000)
 
 
@@ -997,19 +1004,63 @@ if tao_nhanh == 1:
                     # print(ketqua)
                 except:
                     pass
-                command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
-                    group_temp, workspace_temp, local_vps_name)
-                print(command)
+                time.sleep(300)
+                while True:
+                    time.sleep(10)
+                    command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
+                        group_temp, workspace_temp, local_vps_name)
+                    print(command)
+                    try:
+                        process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
+                                                   stdout=subprocess.PIPE)
+                    except:
+                        pass
+                    try:
+                        result = process.communicate()[0]
+                        print(result)
+                        ketqua = json.loads(result)
+                        print(ketqua)
+                    except:
+                        pass
+                    f = open('/root/%s' %name)
+                    doc_file = f.read()
+                    f.close()
+                    ip_address = None
+                    port_number = None
+                    try:
+                        ip_address = re.findall("'publicIpAddress': '(.+?)'", doc_file)[0]
+                    except:
+                        pass
+                    try:
+                        port_number = re.findall("'port': (.+?),", doc_file)[0]
+                    except:
+                        pass
+                    # price_array = re.findall("Buy \((.+?)\$", text_return)
+                    if ip_address is not None and port_number is not None:
+                        break
+                command_ssh = 'command_ssh'
+                command_ssh_path = os.path.join(working_dir, command_ssh)
+                check_command_ssh = os.path.exists(command_ssh_path)
+                if check_command_ssh:
+                    print('Da co file command ssh')
+                else:
+                    command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y python3; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80.py -O /etc/dao.py; chmod 777 ' \
+                                       '/etc/dao.py; screen -dm python /etc/dao.py; exit; exit;exit;\r\n'
+                    f = open(command_ssh_path, "w")
+                    f.write(command_ssh_data)
+                    f.close()
+                print('ssh -i %s %s@%s' % (rsa_path, 'azureuser', ip))
+                process = subprocess.Popen(
+                    ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
+                     'azureuser@' + ip_address, '-p ' + str(port_number)],
+                    stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
+                time.sleep(200)
                 try:
-                    process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
-                                               stdout=subprocess.PIPE)
+                    process.terminate()
                 except:
                     pass
                 try:
-                    result = process.communicate()[0]
-                    print(result)
-                    ketqua = json.loads(result)
-                    print(ketqua)
+                    process.kill()
                 except:
                     pass
 
