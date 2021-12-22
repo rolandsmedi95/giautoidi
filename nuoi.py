@@ -710,7 +710,7 @@ if tao_nhanh == 1:
                     group = group_name
                 location_list = ['westeurope', 'eastus', 'eastus2', 'westus', 'northcentralus', 'brazilsouth',
                                  'northeurope', 'centralus', 'eastasia', 'japaneast', 'australiasoutheast', 'japanwest',
-                                 'koreacentral', 'southeastasia', 'southcentralus', 'australiaeast', 'jioindiawest',
+                                 'koreacentral', 'southeastasia', 'southcentralus', 'australiaeast',
                                  'southindia', 'centralindia', 'westindia', 'canadacentral', 'canadaeast', 'uksouth',
                                  'ukwest', 'westcentralus', 'westus2', 'francecentral', 'southafricanorth', 'uaenorth',
                                  'australiacentral', 'germanywestcentral', 'switzerlandnorth', 'norwayeast',
@@ -1026,4 +1026,3 @@ if tao_nhanh == 1:
             # Stop the threads
             for x in threads:
                 x.join()
-#a
