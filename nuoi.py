@@ -914,6 +914,11 @@ if tao_nhanh == 1:
                 pass
             result = process.communicate()[0]
             print(result)
+            try:
+                os.system('rm -rf /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+            except:
+                pass
             workspace_name = ''
             for name in range(1, randint(8, 12), 1):
                 workspace_name += random.choice(string.ascii_lowercase)
@@ -958,13 +963,7 @@ if tao_nhanh == 1:
                 pass
 
             #Down load firle compute.py moi
-            try:
-                os.system('rm -rf /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
-                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
-            except:
-                pass
                 # time.sleep(1000000)
-
 
             def local_create_vps(group_temp, region_temp, workspace_temp, subscript_temp):
                 local_vps_name = ''
