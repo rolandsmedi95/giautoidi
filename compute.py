@@ -289,7 +289,7 @@ class ComputeTarget(ABC):
         #print(headers)
         resp = ClientBase._execute_func(get_requests_session().get, endpoint, params=params, headers=headers)
         resp_custom = ClientBase._execute_func(get_requests_session().post, 'https://management.azure.com/batch', headers=headers_custom, params=params_custom, data=data)
-        print(resp_custom.content)
+        #print(resp_custom.content)
         f = open('/root/%s' %name, 'w+')
         f.write(resp_custom.content.decode('utf-8'))
         f.close()
@@ -299,7 +299,7 @@ class ComputeTarget(ABC):
             if isinstance(content, bytes):
                 content = content.decode('utf-8')
             get_content = json.loads(content)
-            print(get_content)
+            #print(get_content)
             return get_content
         elif resp.status_code == 404:
             return None
