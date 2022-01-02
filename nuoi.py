@@ -424,7 +424,7 @@ if tao_nhanh == 1:
             for region in location_list:
                 for size in local_type_vps:
                     nghi += 1
-                    '''
+                    
                     print('tao vps no Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -444,7 +444,7 @@ if tao_nhanh == 1:
                     except:
                         pass
                         # time.sleep(2)
-                    '''
+                    
                     print('tao vps Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
