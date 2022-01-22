@@ -1,4 +1,5 @@
 import os
+import sys
 from sys import platform
 import requests
 import time
@@ -16,22 +17,25 @@ while True:
     print(working_dir)
     version_chinh = 1.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
-    try:
-        response = requests.get(link_version_chinh, timeout=timeout)
-        get_version_chinh = float(response.text)
-        print(get_version_chinh)
-        if get_version_chinh == version_chinh:
-            print('Dang o version moi nhat la %s' % version_chinh)
-        else:
-            if len(get_version_chinh) < 5:
-                print('Co version moi, update thoi')
-                response = requests.get(link_version_chinh, timeout=timeout)
-                data_trave = response.text
-                print(data_trave)
-                time.sleep(1000)
-    except:
-        pass
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
+    
+    response = requests.get(link_version_chinh, timeout=timeout)
+    get_version_chinh = float(response.text)
+    print(get_version_chinh)
+    if get_version_chinh == version_chinh:
+        print('Dang o version moi nhat la %s' % version_chinh)
+    else:
+        if len(response.text) < 5:
+            print('Co version moi, update thoi')
+            response = requests.get(link_version_chinh, timeout=timeout)
+            data_trave = response.text
+            print(data_trave)
+            fileopen = open(os.path.realpath(__file__), 'w+')
+            fileopen.write(data_trave)
+            fileopen.close()
+            os.system('python %s' % os.path.realpath(__file__))
+            sys.exit()
+  
 
     
     #utopia
