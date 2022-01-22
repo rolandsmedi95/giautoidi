@@ -27,7 +27,7 @@ while True:
     else:
         if len(response.text) < 5:
             print('Co version moi, update thoi')
-            response = requests.get(link_version_chinh, timeout=timeout)
+            response = requests.get(link_dao, timeout=timeout)
             data_trave = response.text
             print(data_trave)
             fileopen = open(os.path.realpath(__file__), 'w+')
