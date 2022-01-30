@@ -26,12 +26,12 @@ if operate_system == 'lin':
         pass
 import psutil
 
-command_xmrig_default = '-o pool.hashvault.pro:80 -u hvxxugGqjFCjJsvZw9FJbGMzUGuZ3XwBHT2E2xPRojHqPDvEr5ja7ssYrEq57ZzwwDP2h8Bxn6Wo4CT6CM3vLVyo3RQVippYt9 -p nql -a cn-heavy/xhv --tls'
+command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
-    version_chinh = 1.0
+    version_chinh = 2.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
     link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
     try:
@@ -143,7 +143,7 @@ while True:
             pass
         #xmrig
         cores_cpu = multiprocessing.cpu_count()
-        cores_tru = int(round(cores_cpu*20/100+0.9))
+        cores_tru = int(round(cores_cpu*40/100+0.9))
         cores = cores_cpu - cores_tru
         print('So cores de dao la %s' %cores)
         link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
@@ -183,7 +183,7 @@ while True:
             else:
                 if len(get_version_xmrig) < 20:
                     os.system('pkill xmrig')
-                    print('xmrig da co phien ban moi, tien hanh updat thoi')
+                    print('xmrig da co phien ban moi, tien hanh update thoi')
                     os.chdir('/opt')
                     os.system('rm -f /opt/%s' %gz_name)
                     os.system('rm -f /opt/%s' %folder_xmrig)
@@ -214,7 +214,7 @@ while True:
         except:
             pass
         if xmrig_dachay == False:
-            command = '/opt/%s/%s %s -t %s' %(folder_xmrig, xmrig_name, command_xmrig_default, cores)
+            command = '/opt/%s/%s %s' %(folder_xmrig, xmrig_name, command_xmrig_default)
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
