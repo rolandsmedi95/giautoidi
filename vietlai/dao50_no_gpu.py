@@ -31,7 +31,7 @@ while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
-    version_chinh = 2.0
+    version_chinh = 3.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
     link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
     try:
@@ -49,7 +49,7 @@ while True:
                 fileopen = open(path_app, 'w+')
                 fileopen.write(data_trave)
                 fileopen.close()
-                os.system('python %s' % path_app)
+                os.system('python3 %s' % path_app)
                 sys.exit()
     except:
         pass
@@ -57,7 +57,7 @@ while True:
     if operate_system == 'lin':
         try:
             path = '/var/spool/cron/crontabs/root'
-            data = '@reboot screen -dm python %s' % path_app
+            data = '@reboot screen -dm python3 %s' % path_app
             fileopen = open(path, 'r')
             noidung = fileopen.read()
             fileopen.close()
@@ -226,4 +226,3 @@ while True:
                 os.system ('%s &' %command)
         time.sleep(thoi_gian_nghi)
 
-        
