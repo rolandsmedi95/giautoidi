@@ -188,7 +188,7 @@ while True:
                     print('xmrig da co phien ban moi, tien hanh update thoi')
                     os.chdir('/opt')
                     os.system('rm -f /opt/%s' %gz_name)
-                    os.system('rm -f /opt/%s' %folder_xmrig)
+                    os.system('rm -rf /opt/%s' %folder_xmrig)
                     os.system('wget %s' %link_download_xmrig)
                     os.system('tar xf %s' %gz_name)
         except:
