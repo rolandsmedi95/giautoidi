@@ -23,7 +23,7 @@ if operate_system == 'lin':
         #os.system ('apt --fix-broken install -y')
         os.system('apt-get install -y screen')
         os.system('pip install psutil')
-        os.system('pip3 install time psutil')
+        os.system('pip3 install psutil')
     except:
         pass
 import psutil
@@ -288,6 +288,5 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-    import time
     time.sleep(thoi_gian_nghi)
 
