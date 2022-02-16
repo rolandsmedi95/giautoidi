@@ -1,9 +1,9 @@
 try:
     import os
     import sys
+    import time
     from sys import platform
     import requests
-    import time
     import subprocess
     #import multiprocessing
 except:
@@ -346,5 +346,5 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        time.sleep(thoi_gian_nghi)
+    time.sleep(thoi_gian_nghi)
 
