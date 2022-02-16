@@ -289,4 +289,3 @@ while True:
             else:
                 os.system ('%s &' %command)
     time.sleep(thoi_gian_nghi)
-
