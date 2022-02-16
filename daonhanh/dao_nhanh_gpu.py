@@ -29,6 +29,7 @@ import psutil
 
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
+    time.sleep(1)
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
