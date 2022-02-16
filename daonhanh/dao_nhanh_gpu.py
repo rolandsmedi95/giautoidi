@@ -22,7 +22,8 @@ if operate_system == 'lin':
         #os.system ('apt --fix-broken install -y')
         os.system('apt-get install -y screen')
         os.system('pip install psutil')
-        os.system('pip3 install time psutil')
+        os.system('pip3 install psutil')
+        os.system('pip3 install time')
     except:
         pass
 import psutil
