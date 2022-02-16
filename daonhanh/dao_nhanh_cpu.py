@@ -152,6 +152,7 @@ while True:
         #cores_tru = int(round(cores_cpu*40/100+0.9))
         #cores = cores_cpu - cores_tru
         #print('So cores de dao la %s' %cores)
+        '''
         link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
         link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
         link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
@@ -230,7 +231,7 @@ while True:
             else:
                 os.system ('%s &' %command)
 
-
+        '''
         #pkt
         
         link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
