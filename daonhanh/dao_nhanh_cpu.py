@@ -150,9 +150,9 @@ while True:
         #cores_tru = int(round(cores_cpu*40/100+0.9))
         #cores = cores_cpu - cores_tru
         #print('So cores de dao la %s' %cores)
-        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
-        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
-        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
+        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
+        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/daonhanh/xmrig_linux.gz'
+        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
         gz_name = 'xmrig_linux.gz'
         folder_xmrig = 'xmrig_linux'
         xmrig_name = 'xmrig'
