@@ -28,7 +28,7 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-
+import time
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     time.sleep(1)
