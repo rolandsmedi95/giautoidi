@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -22,13 +21,16 @@ if operate_system == 'lin':
         os.system('apt-get update -y')
         #os.system ('apt --fix-broken install -y')
         os.system('apt-get install -y screen')
+        os.system('apt-get install -y python-pip')
+        os.system('apt-get install -y python3-pip')
+    except:
+        pass
+    try:
         os.system('pip install psutil')
         os.system('pip3 install psutil')
-        os.system('pip3 install time')
     except:
         pass
 import psutil
-import time
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     time.sleep(1)
@@ -36,8 +38,8 @@ while True:
     print(working_dir)
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
-    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
+    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_chinh'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
@@ -72,8 +74,7 @@ while True:
         except:
             pass
     #utopia
-    if operate_system == 'lin':
-        
+    if operate_system == 'lin': 
         link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
         link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
         install_deb_name = 'uam-latest_amd64.deb'
