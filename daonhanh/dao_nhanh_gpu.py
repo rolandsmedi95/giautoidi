@@ -1,13 +1,11 @@
-try:
-    import os
-    import sys
-    import time
-    from sys import platform
-    import requests
-    import subprocess
+
+import os
+import sys
+import time
+from sys import platform
+import requests
+import subprocess
     #import multiprocessing
-except:
-    pass
 
 if platform == "linux" or platform == "linux2":
     operate_system = 'lin'
