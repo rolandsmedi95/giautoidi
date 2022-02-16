@@ -288,5 +288,6 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
+    import time
     time.sleep(thoi_gian_nghi)
 
