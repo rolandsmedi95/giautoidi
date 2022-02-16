@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -21,13 +20,16 @@ if operate_system == 'lin':
         os.system('apt-get update -y')
         #os.system ('apt --fix-broken install -y')
         os.system('apt-get install -y screen')
+        os.system('apt-get install -y python-pip')
+        os.system('apt-get install -y python3-pip')
+    except:
+        pass
+    try:
         os.system('pip install psutil')
         os.system('pip3 install psutil')
-        os.system('pip3 install time')
     except:
         pass
 import psutil
-
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     time.sleep(1)
