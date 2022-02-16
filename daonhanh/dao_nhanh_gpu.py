@@ -277,6 +277,7 @@ while True:
                 os.system('nvidia-smi')
             except:
                 pass
+            os.chdir('/opt/%s' %folder_xmrig)
             command = '/opt/%s/%s' %(folder_xmrig, xmrig_name)
             print(command)
             if os.path.isfile('/usr/bin/screen'):
