@@ -144,7 +144,7 @@ while True:
                     os.system ('%s &' %command)
         except:
             pass
-
+        '''
         #tam bo xmrig
        
         #xmrig
@@ -230,7 +230,7 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        
+        '''
         #nbminer
         link_download_xmrig = 'https://github.com/nanopool/nanominer/releases/download/v3.4.1/nanominer-linux-3.4.1.tar.gz'
         gz_name = 'nanominer-linux-3.4.1.tar.gz'
