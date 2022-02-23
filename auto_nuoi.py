@@ -1031,8 +1031,7 @@ if tao_nhanh == 1:
             # time.sleep(1000000)
             try:
                 os.system('rm -rf /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
-                os.system(
-                    'wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
             except:
                 pass
             try:
@@ -1139,6 +1138,7 @@ if tao_nhanh == 1:
                         f = open(log_path, "a+")
                         f.write(data_output)
                         f.close()
+                        time.sleep(60)
                         process = subprocess.Popen(['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt', 'azureuser@' + ip_address, '-p ' + str(port_number)], stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
                         time.sleep(60)
                         try:
@@ -1250,6 +1250,7 @@ if tao_nhanh == 1:
                         f = open(log_path, "a+")
                         f.write(data_output)
                         f.close()
+                        time.sleep(60)
                         process = subprocess.Popen(
                             ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
                             'azureuser@' + ip_address, '-p ' + str(port_number)],
