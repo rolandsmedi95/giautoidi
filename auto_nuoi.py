@@ -1039,7 +1039,7 @@ if tao_nhanh == 1:
                 log_file = 'log.txt'
                 log_path = os.path.join(working_dir, log_file)
                 f = open(log_path, "w+")
-                f.write(" ")
+                f.write("")
                 f.close()
             except:
                 pass
