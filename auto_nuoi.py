@@ -45,8 +45,8 @@ elif platform == "win32":
     operate_system = 'windows'
 #cauhinh
 print(operate_system)
-nuoi_acc = 0
-tao_nhanh = 1
+nuoi_acc = 1
+tao_nhanh = 0
 if nuoi_acc == 1:
     thoigiannghi = 28800
 if tao_nhanh == 1:
@@ -984,40 +984,54 @@ if tao_nhanh == 1:
             result = process.communicate()[0]
             print(result)
 
-            def create_workspace(local_workspace_name, local_group, local_region, local_subscription):
-                
-                try:
-                    command = 'az ml workspace create -w %s -g %s -l %s --subscription %s' % (local_workspace_name, local_group, local_region, local_subscription)
-                    print(command)
-                    # time.sleep(10000000)
-                except:
-                    pass
-                try:
-                    process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],stdout=subprocess.PIPE)
-                except:
-                    pass
-                try:
-                    result = process.communicate()[0]
-                    print(result)
-                    # ketqua = json.loads(result)
-                    # print(ketqua)
-                except:
-                    pass
-
-            location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
-            #location_list = ['eastus']
-            threads = [threading.Thread(target=create_workspace, args=(region, group, region, subscript,)) for region in location_list]
-            for x in threads:
-                time.sleep(1)
-                x.start()
-            # Stop the threads
-            for x in threads:
-                x.join()
+            workspace_name = ''
+            for name in range(1, randint(8, 12), 1):
+                workspace_name += random.choice(string.ascii_lowercase)
+            try:
+                location_list = ['australiaeast', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
+                region_chon = random.choice(location_list)
+                command = 'az ml workspace create -w %s -g %s --subscription %s -l %s' % (workspace_name, group, subscript, region_chon)
+                print(command)
+                # time.sleep(10000000)
+            except:
+                pass
+            try:
+                process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
+                                           stdout=subprocess.PIPE)
+            except:
+                pass
+            try:
+                result = process.communicate()[0]
+                print(result)
+                # ketqua = json.loads(result)
+                # print(ketqua)
+            except:
+                pass
 
             try:
+                command = 'az ml folder attach -w %s -g %s --subscription %s --output json' % (workspace_name, group, subscript)
+                print(command)
+                # time.sleep(10000000)
+            except:
+                pass
+            try:
+                process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
+                                           stdout=subprocess.PIPE)
+            except:
+                pass
+            try:
+                result = process.communicate()[0]
+                print(result)
+                # ketqua = json.loads(result)
+                # print(ketqua)
+            except:
+                pass
+
+            # Down load firle compute.py moi
+            # time.sleep(1000000)
+            try:
                 os.system('rm -rf /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
-                os.system(
-                    'wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
+                os.system('wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
             except:
                 pass
             try:
@@ -1025,7 +1039,7 @@ if tao_nhanh == 1:
                 log_file = 'log.txt'
                 log_path = os.path.join(working_dir, log_file)
                 f = open(log_path, "w+")
-                f.write(" ")
+                f.write("")
                 f.close()
             except:
                 pass
@@ -1237,7 +1251,10 @@ if tao_nhanh == 1:
                         f.write(data_output)
                         f.close()
                         time.sleep(60)
-                        process = subprocess.Popen(['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt', 'azureuser@' + ip_address, '-p ' + str(port_number)], stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
+                        process = subprocess.Popen(
+                            ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
+                            'azureuser@' + ip_address, '-p ' + str(port_number)],
+                            stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
                         time.sleep(60)
                         try:
                             process.terminate()
@@ -1256,9 +1273,9 @@ if tao_nhanh == 1:
             
             location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
             #location_list = ['eastus']
-            threads = [threading.Thread(target=local_create_vps, args=(group, region, region, subscript,)) for region in location_list]
+            threads = [threading.Thread(target=local_create_vps, args=(group, region, workspace_name, subscript,)) for region in location_list]
             for x in threads:
-                time.sleep(2)
+                time.sleep(20)
                 x.start()
             # Stop the threads
             for x in threads:
@@ -1267,9 +1284,9 @@ if tao_nhanh == 1:
             #location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
             location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
             # location_list = ['australiaeast']
-            threads = [threading.Thread(target=local_create_vps_phu, args=(group, region, region, subscript,)) for region in location_list]
+            threads = [threading.Thread(target=local_create_vps_phu, args=(group, region, workspace_name, subscript,)) for region in location_list]
             for x in threads:
-                time.sleep(2)
+                time.sleep(20)
                 x.start()
             # Stop the threads
             for x in threads:
