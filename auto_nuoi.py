@@ -57,7 +57,7 @@ if tao_nhanh == 1:
     multi_batch_account = 1
 
 try:
-    if platform == 'lin':
+    if operate_system == 'linux':
         os.system('rm -rf /root/.ssh/known_hosts')
 except:
     pass
