@@ -45,8 +45,8 @@ elif platform == "win32":
     operate_system = 'windows'
 #cauhinh
 print(operate_system)
-nuoi_acc = 1
-tao_nhanh = 0
+nuoi_acc = 0
+tao_nhanh = 1
 if nuoi_acc == 1:
     thoigiannghi = 28800
 if tao_nhanh == 1:
