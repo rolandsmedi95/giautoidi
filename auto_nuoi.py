@@ -1249,13 +1249,13 @@ if tao_nhanh == 1:
                             pass
                         break
                     time.sleep(60)
-
+            '''
             #location_list = ['australiaeast', 'eastus', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus',
             #                 'southeastasia', 'uksouth', 'westeurope', 'westus2']
             #location_du nc4s
             
-            location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
-            #location_list = ['eastus']
+            #location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
+            location_list = ['eastus']
             threads = [threading.Thread(target=local_create_vps, args=(group, region, region, subscript,)) for region in location_list]
             for x in threads:
                 time.sleep(2)
@@ -1263,7 +1263,7 @@ if tao_nhanh == 1:
             # Stop the threads
             for x in threads:
                 x.join()
-            
+            '''
             #location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
             location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
             # location_list = ['australiaeast']
