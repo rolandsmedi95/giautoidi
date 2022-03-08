@@ -291,4 +291,4 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
-#    time.sleep(thoi_gian_nghi)
+    time.sleep(thoi_gian_nghi)
