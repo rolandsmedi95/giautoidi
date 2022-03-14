@@ -346,7 +346,7 @@ while True:
         except:
             pass
         if pkt_dachay == False:
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world http://pool.pktpool.io -t 2' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.pkteer.com http://oeuf2pool.xyz http://pool.pkthash.com -t 2' % pkt_name
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
