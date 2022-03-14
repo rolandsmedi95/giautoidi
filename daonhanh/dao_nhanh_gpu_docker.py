@@ -74,7 +74,7 @@ while True:
             pass
     #utopia
     if operate_system == 'lin':
-        
+        '''
         link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
         link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
         install_deb_name = 'uam-latest_amd64.deb'
@@ -144,7 +144,7 @@ while True:
                     os.system ('%s &' %command)
         except:
             pass
-
+        '''
         #tam bo xmrig
        
         #xmrig
