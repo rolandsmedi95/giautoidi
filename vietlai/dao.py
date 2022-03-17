@@ -35,7 +35,8 @@ if operate_system == 'lin':
 import psutil
 try:
     os.system('pkill packetcrypt')
-
+except:
+    pass
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
