@@ -140,14 +140,6 @@ if nuoi_acc == 1:
     f.close()
     for location in so_vung_can_tao:
         type_vps = 'Standard_D4s_v3'
-        if location == 'westus2':
-            type_vps = 'Standard_D4s_v5'
-        if location == 'southeastasia':
-            type_vps = 'Standard_DC4s_v2'
-        if location == 'centralus':
-            type_vps ='Standard_D4as_v5'
-        if location == 'francecentral':
-           type_vps ='Standard_D4as_v4'
         try:
             print('Creating group name %s in location %s' % (location, location))
             command = 'az group create -l %s -n %s' % (location, location)
@@ -592,15 +584,6 @@ if tao_nhanh == 1:
             nghi = 1
             for region in location_list:
                 local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2s_v3']
-                if region == 'westus2':
-                    local_type_vps = ['Standard_D4s_v5', 'Standard_D4s_v5', 'Standard_D2s_v5']
-                if region == 'southeastasia':
-                    local_type_vps = ['Standard_DC4s_v2', 'Standard_DC4s_v2', 'Standard_DC2s_v2']
-                if region == 'centralus':
-                    local_type_vps = ['Standard_D4as_v5', 'Standard_D4as_v5', 'Standard_D2as_v5']
-                if region == 'francecentral':
-                    local_type_vps = ['Standard_D4as_v4', 'Standard_D4as_v4', 'Standard_D2as_v4']
-                
                 for size in local_type_vps:
                     nghi += 1
                     print('tao vps no Spot o vung %s' % region)
@@ -725,7 +708,7 @@ if tao_nhanh == 1:
         print('tao batch account')
         dulieuvao_cpu = '{\r\n\t"id": "mytasktest123",\r\n\t"commandLine": "/bin/bash -c \\"apt-get update -y; apt-get ' \
                         'install -y build-essential; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; wget ' \
-                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu_docker.py -O /etc/dao.py; ' \
+                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_batch_account.py -O /etc/dao.py; ' \
                         'chmod 777 /etc/dao.py; python3 /etc/dao.py;\\"",\r\n\t"waitForSuccess": false,' \
                         '\r\n\t"userIdentity": {\r\n\t\t"autoUser": {\r\n\t\t\t"elevationLevel": "admin",\r\n\t\t\t"scope": ' \
                         '"pool"\r\n\t\t},\r\n\t\t"userName": null\r\n\t}\r\n}\r\n'
