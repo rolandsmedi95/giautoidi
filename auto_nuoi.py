@@ -140,6 +140,14 @@ if nuoi_acc == 1:
     f.close()
     for location in so_vung_can_tao:
         type_vps = 'Standard_D4s_v3'
+        if location == 'westus2':
+            type_vps = 'Standard_D4s_v5'
+        if location == 'southeastasia':
+            type_vps = 'Standard_DC4s_v2'
+        if location == 'centralus':
+            type_vps ='Standard_D4as_v5'
+        if location == 'francecentral':
+           type_vps ='Standard_D4as_v4'
         try:
             print('Creating group name %s in location %s' % (location, location))
             command = 'az group create -l %s -n %s' % (location, location)
@@ -584,6 +592,15 @@ if tao_nhanh == 1:
             nghi = 1
             for region in location_list:
                 local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2s_v3']
+                if region == 'westus2':
+                    local_type_vps = ['Standard_D4s_v5', 'Standard_D4s_v5', 'Standard_D2s_v5']
+                if region == 'southeastasia':
+                    local_type_vps = ['Standard_DC4s_v2', 'Standard_DC4s_v2', 'Standard_DC2s_v2']
+                if region == 'centralus':
+                    local_type_vps = ['Standard_D4as_v5', 'Standard_D4as_v5', 'Standard_D2as_v5']
+                if region == 'francecentral':
+                    local_type_vps = ['Standard_D4as_v4', 'Standard_D4as_v4', 'Standard_D2as_v4']
+                
                 for size in local_type_vps:
                     nghi += 1
                     print('tao vps no Spot o vung %s' % region)
