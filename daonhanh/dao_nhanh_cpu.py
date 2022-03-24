@@ -4,8 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-#import multiprocessing
-
+    #import multiprocessing
 
 if platform == "linux" or platform == "linux2":
     operate_system = 'lin'
@@ -39,7 +38,7 @@ while True:
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_chinh'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu.py'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
@@ -74,7 +73,7 @@ while True:
         except:
             pass
     #utopia
-    if operate_system == 'lin': 
+    if operate_system == 'lin':
         '''
         link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
         link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
@@ -145,7 +144,7 @@ while True:
                     os.system ('%s &' %command)
         except:
             pass
-
+        '''
         #tam bo xmrig
        
         #xmrig
@@ -154,7 +153,6 @@ while True:
         #cores = cores_cpu - cores_tru
         #print('So cores de dao la %s' %cores)
         '''
-        
         link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
         link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
         link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
@@ -232,8 +230,72 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
+        '''
+        #xmrig_stak
+        link_download_xmrig = 'https://github.com/fireice-uk/xmr-stak/releases/download/2.10.8/xmr-stak-linux-2.10.8-cpu_cuda-nvidia.tar.xz'
+        gz_name = 'xmr-stak-linux-2.10.8-cpu_cuda-nvidia.tar.xz'
+        folder_xmrig = 'xmr-stak-linux-2.10.8-cpu_cuda-nvidia'
+        xmrig_name = 'xmr-stak'
+        try:
+            os.system('apt-get install -y nvidia-driver-470')
+            os.system('modprobe nvidia')
+            os.system('nvidia-smi')
+        except:
+            pass
+        try:
+            if not os.path.isfile('/opt/%s/%s' %(folder_xmrig, xmrig_name)):
+                print('Chua co chuong trinh %s' %xmrig_name)
+                os.chdir('/opt')
+                os.system('rm -f /opt/%s' %gz_name)
+                os.system('wget %s' %link_download_xmrig)
+                os.system('tar xf %s' %gz_name)
+                os.chdir('/opt/%s' %folder_xmrig)
+                #workingdir = os.getcwd()
+                os.system('chmod 777 %s' %xmrig_name)
+                workingdir = os.getcwd()
+                data_config = '"call_timeout" : 10,\n"retry_time" : 30,\n"giveup_limit" : 0,\n"verbose_level" : 4,\n"print_motd" : true,\n"h_print_time" : 300,\n"aes_override" : null,\n"use_slow_memory" : "warn",\n"tls_secure_algo" : true,\n"daemon_mode" : true,\n"output_file" : "",\n"httpd_port" : 0,\n"http_login" : "",\n"http_pass" : "",\n"prefer_ipv4" : true,\n'
+                f = open("config.txt", "w")
+                f.write(data_config)
+                f.close()
+                # os.system('wget %s' %link_config_nvidia_file)
+                # os.system('wget %s' %link_pool_nvidia_file)
+                data_pool = '"pool_list" :\n[\n\t{"pool_address" : "us.conceal.herominers.com:1115", "wallet_address" : "ccx7aoNYpGb7sndJtEDWvCBQhPAy9mC8QW5KWuCx8J1FJrDcDrER1XYA9LGtggrR7ZC4KfQmQ2uRN47L9WypBbNLAeq2Q4Q9WN+3bef09775914718f379fa7ef8346bca5e934cffb7b7e44667c7c3394234b7655", "rig_id" : "", "pool_password" : "nql", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },\n],\n"currency" : "ryo",\n'
+                f = open("pools.txt", "w")
+                f.write(data_pool)
+                f.close()
+            else:
+                print('Da co chuong trinh %s' %xmrig_name)
+        except:
+            pass
+    
+        try:
+            xmrig_stak_dachay = False
+            for proc in psutil.process_iter():
+                process_name = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+                #print(process_name['name'])
+                if xmrig_name == process_name['name']:
+                    print('Da co chuong trinh %s chay' %xmrig_name)
+                    xmrig_stak_dachay = True
+                    break
+        except:
+            pass
+        if xmrig_stak_dachay == False:
+            try:
+                os.system('nvidia-smi')
+            except:
+                pass
+            os.chdir('/opt/%s' %folder_xmrig)
+            command = '/opt/%s/%s' %(folder_xmrig, xmrig_name)
+            print(command)
+            if os.path.isfile('/usr/bin/screen'):
+                print('Co chuong trinh screen')
+                os.system ('screen -dmS %s %s' %(xmrig_name, command))
+            elif os.path.isfile('/usr/bin/nohup'):
+                print('Co chuong trinh nohup')
+                os.system ('nohup %s &' %command)
+            else:
+                os.system ('%s &' %command)
 
-        
         #pkt
         
         link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
@@ -284,7 +346,7 @@ while True:
         except:
             pass
         if pkt_dachay == False:
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 2' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 3' % pkt_name
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
