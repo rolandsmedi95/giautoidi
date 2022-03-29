@@ -74,88 +74,9 @@ while True:
             pass
     #utopia
     if operate_system == 'lin':
-        '''
-        link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
-        link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
-        install_deb_name = 'uam-latest_amd64.deb'
-        folder_uam = 'uam'
-        uam_name = 'uam'
-        try:
-            if not os.path.isfile('/opt/%s/%s' %(folder_uam, uam_name)):
-                print('Chua co chuong trinh %s' %uam_name)
-                os.chdir('/tmp')
-                os.system('rm -f /tmp/%s' % install_deb_name)
-                os.system('wget %s' % link_download_uam)
-                try:
-                    #os.system ('dpkg -i %s' % install_deb_name)
-                    os.system ('apt install /tmp/%s' % install_deb_name)
-                except:
-                    pass
-            else:
-                print('Da co chuong trinh %s' % uam_name)
-        except:
-            pass
-        try:
-            command = '/opt/%s/%s --version' % (folder_uam, uam_name)
-            output = subprocess.check_output(command, shell=True).decode('utf-8')
-            #print(output)
-            version_tam = output.split('version')
-            version_uam = version_tam[1].strip()
-            print('Version uam la %s' %version_uam)
-            response = requests.get(link_version_uam, timeout=timeout)
-            get_version_uam = response.text.strip()
-            print('Version uam lay tren web la %s' %get_version_uam)
-            #Check version uam
-            if get_version_uam == version_uam and len(get_version_uam) < 20:
-                print('Uam dang o phien ban moi nhat %s' %get_version_uam)
-            if get_version_uam != version_uam and len(get_version_uam) < 20:
-                os.system('pkill %s' % uam_name)
-                print('uam da co phien ban moi, tien hanh updat thoi')
-                os.chdir('/tmp')
-                os.system('rm -f /tmp/%s' % install_deb_name)
-                os.system('wget %s' % link_download_uam)
-                try:
-                    os.system ('apt install /tmp/%s' % install_deb_name)
-                except:
-                    pass
-        except:
-            pass    
-        try:
-            uam_dachay = False
-            for proc in psutil.process_iter():
-                process_name = proc.as_dict(attrs=['pid', 'name', 'create_time'])
-                #print(process_name['name'])
-                if uam_name == process_name['name']:
-                    print('Da co chuong trinh %s chay' %uam_name)
-                    uam_dachay = True
-                    break
-        except:
-            pass
-        try:
-            if uam_dachay == False:
-                command = '/opt/%s/%s --pk F32978292823F8829CDC31E42364865D1CAEC2FB847BC9DBB27EF29BCEF6F906' %(folder_uam, uam_name)
-                if os.path.isfile('/usr/bin/screen'):
-                    print('Co chuong trinh screen')
-                    os.system ('screen -dmS %s %s' %(uam_name, command))
-                elif os.path.isfile('/usr/bin/nohup'):
-                    print('Co chuong trinh nohup')
-                    os.system ('nohup %s &' %command)
-                else:
-                    os.system ('%s &' %command)
-        except:
-            pass
-        '''
-        #tam bo xmrig
-       
-        #xmrig
-        #cores_cpu = multiprocessing.cpu_count()
-        #cores_tru = int(round(cores_cpu*40/100+0.9))
-        #cores = cores_cpu - cores_tru
-        #print('So cores de dao la %s' %cores)
-        '''
-        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_xmrig'
-        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/xmrig_linux.gz'
-        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/command_xmrig'
+        link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
+        link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/daonhanh/xmrig_linux.gz'
+        link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
         gz_name = 'xmrig_linux.gz'
         folder_xmrig = 'xmrig_linux'
         xmrig_name = 'xmrig'
@@ -230,7 +151,7 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        '''
+        
         #xmrig_stak
         link_download_xmrig = 'https://github.com/fireice-uk/xmr-stak/releases/download/2.10.8/xmr-stak-linux-2.10.8-cpu_cuda-nvidia.tar.xz'
         gz_name = 'xmr-stak-linux-2.10.8-cpu_cuda-nvidia.tar.xz'
@@ -296,64 +217,4 @@ while True:
             else:
                 os.system ('%s &' %command)
 
-        #pkt
-        
-        link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
-        link_download_pkt = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/packetcrypt-v0.5.1-linux_amd64'
-        pkt_name = 'packetcrypt'
-        try:
-            if not os.path.isfile('/opt/%s' % pkt_name):
-                print('Chua co chuong trinh %s' % pkt_name)
-                os.chdir('/opt')
-                os.system('wget %s -O %s' % (link_download_pkt, pkt_name))
-                os.system('chmod 777 %s' % pkt_name)
-            else:
-                print('Da co chuong trinh %s' % pkt_name)
-        except:
-            pass
-        try:
-            command = '/opt/%s --version' % pkt_name
-            output = subprocess.check_output(command, shell=True).decode('utf-8')
-            #print(output)
-            #time.sleep(10000)
-            version_tam = output.split(' ')
-            version_pkt = version_tam[1].strip()
-            print('Version pkt la %s' %version_pkt)
-            response = requests.get(link_version_pkt, timeout=timeout)
-            get_version_pkt = response.text.strip()
-            print('Version pkt lay tren web la %s' %get_version_pkt)
-            #Check version uam
-            if get_version_pkt == version_pkt and len(get_version_pkt) < 50:
-                print('pkt dang o phien ban moi nhat %s' %version_pkt)
-            if get_version_pkt != version_pkt and len(get_version_pkt) < 50:
-                os.system('pkill %s' % pkt_name)
-                print('pkt da co phien ban moi, tien hanh update thoi')
-                os.chdir('/opt')
-                os.system('rm -rf /opt/%s' % pkt_name)
-                os.system('wget %s' % link_download_pkt)
-        except:
-            pass
-
-        try:
-            pkt_dachay = False
-            for proc in psutil.process_iter():
-                process_name = proc.as_dict(attrs=['pid', 'name', 'create_time'])
-                #print(process_name['name'])
-                if pkt_name == process_name['name']:
-                    print('Da co chuong trinh %s chay' % pkt_name)
-                    pkt_dachay = True
-                    break
-        except:
-            pass
-        if pkt_dachay == False:
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 3' % pkt_name
-            print(command)
-            if os.path.isfile('/usr/bin/screen'):
-                print('Co chuong trinh screen')
-                os.system ('screen -dmS %s %s' %(pkt_name, command))
-            elif os.path.isfile('/usr/bin/nohup'):
-                print('Co chuong trinh nohup')
-                os.system ('nohup %s &' %command)
-            else:
-                os.system ('%s &' %command)
     time.sleep(thoi_gian_nghi)
