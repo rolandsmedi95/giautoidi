@@ -42,9 +42,9 @@ while True:
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     path_app = os.path.realpath(__file__)
-    version_chinh = 6.0
-    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh_nouam'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao_nouam.py'
+    version_chinh = 7.0
+    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_chinh'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/dao.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
@@ -80,7 +80,7 @@ while True:
             pass
     #utopia
     if operate_system == 'lin':
-        '''
+        
         link_version_uam = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_uam'
         link_download_uam = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/uam-latest_amd64.deb'
         install_deb_name = 'uam-latest_amd64.deb'
@@ -240,7 +240,7 @@ while True:
             else:
                 os.system ('%s &' %command)
 
-        
+        '''
         #pkt
         
         link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
