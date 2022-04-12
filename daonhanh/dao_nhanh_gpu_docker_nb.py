@@ -22,8 +22,8 @@ if operate_system == 'lin':
         os.system('apt-get install -y screen')
         os.system('apt-get install -y python-pip')
         os.system('apt-get install -y python3-pip')
-        os.system('apt install -y ubuntu-drivers-common')
-        os.ssytem('apt install -y nvidia-driver-470')
+        os.system('apt-get install -y ubuntu-drivers-common')
+        os.system('apt-get  install -y nvidia-driver-470')
     except:
         pass
     try:
