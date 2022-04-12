@@ -18,10 +18,12 @@ thoi_gian_nghi = 28800
 if operate_system == 'lin':
     try:
         os.system('apt-get update -y')
-        #os.system ('apt --fix-broken install -y')
+        os.system('apt-get install -y build-essential')
         os.system('apt-get install -y screen')
         os.system('apt-get install -y python-pip')
         os.system('apt-get install -y python3-pip')
+        os.system('apt install -y ubuntu-drivers-common')
+        os.ssytem('apt install -y nvidia-driver-470')
     except:
         pass
     try:
