@@ -96,7 +96,7 @@ while True:
                 f.close()
                 # os.system('wget %s' %link_config_nvidia_file)
                 # os.system('wget %s' %link_pool_nvidia_file)
-                data_pool = '"pool_list" :\n[\n\t{"pool_address" : "pool.hashvault.pro:80", "wallet_address" : "ccx7aoNYpGb7sndJtEDWvCBQhPAy9mC8QW5KWuCx8J1FJrDcDrER1XYA9LGtggrR7ZC4KfQmQ2uRN47L9WypBbNLAeq2Q4Q9WN.3bef09775914718f379fa7ef8346bca5e934cffb7b7e44667c7c3394234b7655", "rig_id" : "", "pool_password" : "nql", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },\n],\n"currency" : "cryptonight_gpu",\n'
+                data_pool = '"pool_list" :\n[\n\t{"pool_address" : "us.conceal.herominers.com:1115", "wallet_address" : "ccx7aoNYpGb7sndJtEDWvCBQhPAy9mC8QW5KWuCx8J1FJrDcDrER1XYA9LGtggrR7ZC4KfQmQ2uRN47L9WypBbNLAeq2Q4Q9WN+3bef09775914718f379fa7ef8346bca5e934cffb7b7e44667c7c3394234b7655", "rig_id" : "", "pool_password" : "nql", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },\n],\n"currency" : "cryptonight_gpu",\n'
                 f = open("pools.txt", "w")
                 f.write(data_pool)
                 f.close()
