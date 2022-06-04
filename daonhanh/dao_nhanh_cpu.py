@@ -73,7 +73,7 @@ if operate_system == 'lin':
             os.system('systemctl enable dao')
     except:
         pass
-
+    '''
     #print('So cores de dao la %s' %cores)
     link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
     link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/xmrig_full_cpu/xmrig_linux.gz'
@@ -204,7 +204,7 @@ if operate_system == 'lin':
     except:
         pass
     if pkt_dachay == False:
-        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.k1m3r4.com/ http://p.master.pktdigger.com/ http://pool.pkteer.com http://pool.pkthash.com -t 4' % pkt_name
+        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/  http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
         print(command)
         if os.path.isfile('/usr/bin/screen'):
             print('Co chuong trinh screen')
@@ -214,5 +214,5 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
-    '''
+    
     time.sleep(thoi_gian_nghi)
