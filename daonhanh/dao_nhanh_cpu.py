@@ -73,7 +73,7 @@ if operate_system == 'lin':
             os.system('systemctl enable dao')
     except:
         pass
-    '''
+    
     #print('So cores de dao la %s' %cores)
     link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
     link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/xmrig_full_cpu/xmrig_linux.gz'
@@ -155,7 +155,7 @@ if operate_system == 'lin':
 
 
     #pkt
-    '''
+    
     link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
     link_download_pkt = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/packetcrypt-v0.5.1-linux_amd64'
     pkt_name = 'packetcrypt'
@@ -204,7 +204,7 @@ if operate_system == 'lin':
     except:
         pass
     if pkt_dachay == False:
-        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/  http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
+        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/  http://pool.pkteer.com http://pool.pkthash.com -t 1' % pkt_name
         print(command)
         if os.path.isfile('/usr/bin/screen'):
             print('Co chuong trinh screen')
