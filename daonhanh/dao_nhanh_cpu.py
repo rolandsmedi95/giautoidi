@@ -153,7 +153,7 @@ if operate_system == 'lin':
         else:
             os.system ('%s &' %command)
 
-
+    '''
     #pkt
     
     link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
@@ -214,5 +214,5 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
-    
+    '''
     time.sleep(thoi_gian_nghi)
