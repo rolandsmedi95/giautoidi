@@ -155,7 +155,7 @@ if operate_system == 'lin':
 
 
     #pkt
-    
+    '''
     link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
     link_download_pkt = 'https://github.com/giautoidi/giautoidi/raw/beta/vietlai/packetcrypt-v0.5.1-linux_amd64'
     pkt_name = 'packetcrypt'
@@ -214,4 +214,5 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
+    '''
     time.sleep(thoi_gian_nghi)
