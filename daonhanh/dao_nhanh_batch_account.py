@@ -233,3 +233,7 @@ if operate_system == 'lin':
                 os.system('pkill node_agent')
             except:
                 pass
+            try:
+                os.system('pkill tail')
+            except:
+                pass
