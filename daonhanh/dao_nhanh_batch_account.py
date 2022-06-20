@@ -80,7 +80,7 @@ if operate_system == 'lin':
         pass
     #print('So cores de dao la %s' %cores)
     #xmr
-    
+    '''
     link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
     link_download_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/xmrig_linux.gz'
     link_command_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/command_xmrig'
@@ -149,7 +149,7 @@ if operate_system == 'lin':
         else:
             os.system ('%s &' %command)
     
-
+    '''
     #pkt
     
     link_version_pkt = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/vietlai/version_pkt'
@@ -200,8 +200,8 @@ if operate_system == 'lin':
     except:
         pass
     if pkt_dachay == False:
-        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com -t 2' % pkt_name
-        #command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
+        #command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com -t 2' % pkt_name
+        command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
         print(command)
         if os.path.isfile('/usr/bin/screen'):
             print('Co chuong trinh screen')
