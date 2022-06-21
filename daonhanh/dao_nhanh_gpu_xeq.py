@@ -133,4 +133,4 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-    time.sleep(thoigiannghi)
+    time.sleep(thoi_gian_nghi)
