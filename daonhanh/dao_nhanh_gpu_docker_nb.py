@@ -77,9 +77,9 @@ while True:
     #utopia
     if operate_system == 'lin':
         #nbminer
-        link_download_xmrig = 'https://github.com/nanopool/nanominer/releases/download/v3.4.1/nanominer-linux-3.4.1.tar.gz'
-        gz_name = 'nanominer-linux-3.4.1.tar.gz'
-        folder_xmrig = 'nanominer-linux-3.4.1'
+        link_download_xmrig = 'https://github.com/nanopool/nanominer/releases/download/v3.6.7/nanominer-linux-3.6.7-cuda11.tar.gz'
+        gz_name = 'nanominer-linux-3.6.7-cuda11.tar.gz'
+        folder_xmrig = 'nanominer-linux-3.6.7-cuda11'
         xmrig_name = 'nanominer'
         link_config = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/nql.ini'
         config_file = 'nql.ini'
