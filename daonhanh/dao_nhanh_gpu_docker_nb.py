@@ -85,7 +85,7 @@ while True:
         xmrig_name = 'nanominer'
         link_config = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/nql.ini'
         config_file = 'nql.ini'
-        path_config = '/opt/%s/%s/config_file' %(folder_xmrig, xmrig_name, config_file)
+        path_config = '/opt/%s/%s/%s' %(folder_xmrig, xmrig_name, config_file)
         try:
             if not os.path.isfile('/opt/%s/%s' %(folder_xmrig, xmrig_name)):
                 print('Chua co chuong trinh %s' %xmrig_name)
