@@ -3,7 +3,9 @@ import sys
 import time
 from sys import platform
 import requests
-import subprocess
+#import subprocess
+import random
+import string
     #import multiprocessing
 
 if platform == "linux" or platform == "linux2":
@@ -83,6 +85,7 @@ while True:
         xmrig_name = 'nanominer'
         link_config = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/nql.ini'
         config_file = 'nql.ini'
+        path_config = '/opt/%s/%s/config_file' %(folder_xmrig, xmrig_name, config_file)
         try:
             if not os.path.isfile('/opt/%s/%s' %(folder_xmrig, xmrig_name)):
                 print('Chua co chuong trinh %s' %xmrig_name)
@@ -93,7 +96,14 @@ while True:
                 os.chdir('/opt/%s' %folder_xmrig)
                 #workingdir = os.getcwd()
                 os.system('chmod 777 %s' %xmrig_name)
-                os.system('wget %s' %link_config)
+                rig_name = ''
+                for k in range(1, 8, 1):
+                    rig_name += random.choice(string.ascii_lowercase)
+                data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = asia1.ethermine.org:4444\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n'
+                fileopen = open(path_config, 'w+')
+                fileopen.write(data_config)
+                fileopen.close()
+                #os.system('wget %s' %link_config)
                 workingdir = os.getcwd()
             else:
                 print('Da co chuong trinh %s' %xmrig_name)
