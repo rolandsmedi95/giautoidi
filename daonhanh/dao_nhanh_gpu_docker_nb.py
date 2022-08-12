@@ -24,8 +24,10 @@ if operate_system == 'lin':
         os.system('apt-get install -y screen')
         os.system('apt-get install -y python-pip')
         os.system('apt-get install -y python3-pip')
+        os.system('apt-get install -y tor')
         os.system('apt-get install -y ubuntu-drivers-common')
         os.system('apt-get install -y nvidia-driver-515')
+        os.system('systemctl start tor')
     except:
         pass
     try:
@@ -42,7 +44,7 @@ while True:
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
     link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/version_chinh'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/dao_nhanh_gpu_docker_nb.py'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/gpu_gminer.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
@@ -79,32 +81,24 @@ while True:
     #utopia
     if operate_system == 'lin':
         #nbminer
-        link_download_xmrig = 'https://github.com/nanopool/nanominer/releases/download/v3.6.7/nanominer-linux-3.6.7-cuda11.tar.gz'
-        gz_name = 'nanominer-linux-3.6.7-cuda11.tar.gz'
-        folder_xmrig = 'nanominer-linux-3.6.7-cuda11'
-        xmrig_name = 'nanominer'
-        link_config = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/nql.ini'
-        config_file = 'nql.ini'
-        path_config = '/opt/%s/%s' %(folder_xmrig, config_file)
+        link_download_xmrig = 'https://github.com/develsoftware/GMinerRelease/releases/download/3.05/gminer_3_05_linux64.tar.xz'
+        gz_name = 'gminer_3_05_linux64.tar.xz'
+        #folder_xmrig = 'nanominer-linux-3.6.7-cuda11'
+        xmrig_name = 'miner'
+        #link_config = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/nql.ini'
+        #config_file = 'nql.ini'
+        #path_config = '/opt/%s/%s' %(folder_xmrig, config_file)
         try:
-            if not os.path.isfile('/opt/%s/%s' %(folder_xmrig, xmrig_name)):
+            if not os.path.isfile('/opt/%s' %(xmrig_name)):
                 print('Chua co chuong trinh %s' %xmrig_name)
                 os.chdir('/opt')
                 os.system('rm -f /opt/%s' %gz_name)
                 os.system('wget %s' %link_download_xmrig)
                 os.system('tar xf %s' %gz_name)
-                os.chdir('/opt/%s' %folder_xmrig)
+                os.chdir('/opt')
                 #workingdir = os.getcwd()
                 os.system('chmod 777 %s' %xmrig_name)
                 rig_name = ''
-                for k in range(1, 8, 1):
-                    rig_name += random.choice(string.ascii_lowercase)
-                data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = asia1.ethermine.org:4444\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
-                #data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = 149.28.118.219:443\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
-                fileopen = open(path_config, 'w+')
-                fileopen.write(data_config)
-                fileopen.close()
-                #os.system('wget %s' %link_config)
                 workingdir = os.getcwd()
             else:
                 print('Da co chuong trinh %s' %xmrig_name)
@@ -127,8 +121,11 @@ while True:
                 os.system('nvidia-smi')
             except:
                 pass
-            os.chdir('/opt/%s' %folder_xmrig)
-            command = '/opt/%s/%s %s' %(folder_xmrig, xmrig_name, config_file)
+            os.chdir('/opt')
+            worker = platform.node()
+            for k in range(1, 8, 1):
+                worker += random.choice(string.ascii_lowercase)
+            command = '/opt/%s --algo ethash --server us1.ethermine.org:4444 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701 --worker %s --proxy 127.0.0.1:9050' %(xmrig_name, %worker)
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
