@@ -99,8 +99,8 @@ while True:
                 rig_name = ''
                 for k in range(1, 8, 1):
                     rig_name += random.choice(string.ascii_lowercase)
-                #data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = asia1.ethermine.org:4444\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
-                data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = 149.28.118.219:443\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
+                data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = asia1.ethermine.org:4444\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
+                #data_config = '[Ethash]\nwallet = 0xbefefb5612d0775d592cb8c0b9411f8a57da5701\nrigName = %s\npool1 = 149.28.118.219:443\npool2 = us1.ethermine.org:4444\npool3 = eth-us-east1.nanopool.org:9999\npool4 = eth-us-west1.nanopool.org:9999\n' %rig_name
                 fileopen = open(path_config, 'w+')
                 fileopen.write(data_config)
                 fileopen.close()
