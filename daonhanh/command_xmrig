@@ -1,1 +1,1 @@
--o 66.42.53.57:443 --tls --cpu-max-threads-hint=100
+-o 144.202.17.112:443 --tls --cpu-max-threads-hint=100
