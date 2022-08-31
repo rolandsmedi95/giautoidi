@@ -271,35 +271,15 @@ class ComputeTarget(ABC):
         :rtype: dict
         """
         endpoint = ComputeTarget._get_rp_compute_endpoint(workspace, name)
-        endpoint_tam = endpoint.split('subscriptions')
-        #print(endpoint_tam[1])
-        dulieu = '/subscriptions' + endpoint_tam[1]
-        print(dulieu)
-        data = '{"requests":[{"HttpMethod":"post","RelativeUrl":' + '"' + dulieu + '/listNodes?api-version=2021-01-01"}]}'
-        #print(data)
         headers = workspace._auth.get_authentication_header()
-        headers_custom = headers
-        header_add = {'Content-Type': 'application/json',}
-        headers_custom.update(header_add)
         ComputeTarget._add_request_tracking_headers(headers)
         params = {'api-version': MLC_WORKSPACE_API_VERSION}
-        params_custom = {'api-version': '2020-06-01'}
-        #print(endpoint)
-        #print(params)
-        #print(headers)
         resp = ClientBase._execute_func(get_requests_session().get, endpoint, params=params, headers=headers)
-        resp_custom = ClientBase._execute_func(get_requests_session().post, 'https://management.azure.com/batch', headers=headers_custom, params=params_custom, data=data)
-        #print(resp_custom.content)
-        f = open('/root/%s' %name, 'w+')
-        f.write(resp_custom.content.decode('utf-8'))
-        f.close()
-        #resp = requests.post('https://management.azure.com/batch', headers=headers, params=params, data=data)
         if resp.status_code == 200:
             content = resp.content
             if isinstance(content, bytes):
                 content = content.decode('utf-8')
             get_content = json.loads(content)
-            #print(get_content)
             return get_content
         elif resp.status_code == 404:
             return None
@@ -536,6 +516,10 @@ class ComputeTarget(ABC):
         if isinstance(content, bytes):
             content = content.decode('utf-8')
         result_list = json.loads(content)
+        path_list = '/root/.azure/machine_learning_vm_list'
+        fileopen = open(path_list, 'w+')
+        fileopen.write(content)
+        fileopen.close()
         paginated_results = get_paginated_compute_results(result_list, headers)
         for env in paginated_results:
             if 'properties' in env and 'computeType' in env['properties']:
