@@ -13,11 +13,11 @@ elif platform == "darwin":
     operate_system = 'OS X'
 elif platform == "win32":
     operate_system = 'win'
-cores = multiprocessing.cpu_count()
+#cores = multiprocessing.cpu_count()
 #cores = cores - 1
-if cores <= 0:
-    cores = 1
-timeout = 30
+#if cores <= 0:
+#    cores = 1
+#timeout = 30
 thoi_gian_nghi = 28800
 
 if operate_system == 'lin':
