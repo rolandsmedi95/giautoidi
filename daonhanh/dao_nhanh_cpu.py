@@ -17,7 +17,7 @@ elif platform == "win32":
 #cores = cores - 1
 #if cores <= 0:
 #    cores = 1
-#timeout = 30
+timeout = 30
 thoi_gian_nghi = 28800
 
 if operate_system == 'lin':
