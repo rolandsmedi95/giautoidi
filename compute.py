@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # ---------------------------------------------------------
 """Contains the abstract parent and configuration classes for compute targets in Azure Machine Learning."""
+#/root/.azure/cliextensions/azure-cli-ml/azureml/core/compute/compute.py
 
 try:
     from abc import ABCMeta
@@ -517,9 +518,8 @@ class ComputeTarget(ABC):
             content = content.decode('utf-8')
         result_list = json.loads(content)
         path_list = '/root/.azure/machine_learning_vm_list'
-        fileopen = open(path_list, 'w+')
-        fileopen.write(content)
-        fileopen.close()
+        with open(path_list, 'w') as convert_file:
+            convert_file.write(json.dumps(result_list))
         paginated_results = get_paginated_compute_results(result_list, headers)
         for env in paginated_results:
             if 'properties' in env and 'computeType' in env['properties']:
