@@ -28,7 +28,7 @@ if operate_system == 'lin':
         os.system('apt-get install -y python-pip')
         os.system('apt-get install -y python3-pip')
     except:
-        pass--http-port=
+        pass
     try:
         os.system('pip install psutil')
         os.system('pip3 install psutil')
