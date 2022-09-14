@@ -4,7 +4,7 @@ import time
 from sys import platform
 import requests
 import subprocess
-#import multiprocessing
+import multiprocessing
 
 
 if platform == "linux" or platform == "linux2":
