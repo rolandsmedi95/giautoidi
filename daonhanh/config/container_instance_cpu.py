@@ -43,8 +43,8 @@ while True:
     print(working_dir)
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
-    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/version_container_instance'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/container_instance.py'
+    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/version_container_instance_cpu'
+    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/container_instance_cpu.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
