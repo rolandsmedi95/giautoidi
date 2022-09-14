@@ -141,14 +141,7 @@ while True:
         if xmrig_dachay == False:
             command = '/opt/%s/%s %s' %(folder_xmrig, xmrig_name, command_xmrig_default)
             print(command)
-            if os.path.isfile('/usr/bin/screen'):
-                print('Co chuong trinh screen')
-                os.system ('screen -dmS %s %s' %(xmrig_name, command))
-            elif os.path.isfile('/usr/bin/nohup'):
-                print('Co chuong trinh nohup')
-                os.system ('nohup %s &' %command)
-            else:
-                os.system ('%s &' %command)
+            os.system ('%s' %command)
 
         '''
         #pkt
