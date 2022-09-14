@@ -43,7 +43,7 @@ while True:
     print(working_dir)
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
-    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/version_batch_account_cpu.py'
+    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/version_batch_account_cpu'
     link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/batch_account_cpu.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
