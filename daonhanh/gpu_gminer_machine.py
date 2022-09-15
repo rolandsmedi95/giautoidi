@@ -123,7 +123,7 @@ while True:
                 pass
             os.chdir('/opt')
             #command = '/opt/%s --algo ethash --server asia1.ethermine.org:4444 --user 0xbefefb5612d0775d592cb8c0b9411f8a57da5701 --proxy 127.0.0.1:9050' %(xmrig_name)
-            command = '/opt/%s --algo ethash --server asia1.ethermine.org:4444 --user 0x5756708c993222ab091e706cc3a70ad1ef1b04f0' %(xmrig_name)
+            command = '/opt/%s --algo etchash --server us1-etc.ethermine.org:4444 --user 0x5756708c993222ab091e706cc3a70ad1ef1b04f0' %(xmrig_name)
             print(command)
             if os.path.isfile('/usr/bin/screen'):
                 print('Co chuong trinh screen')
